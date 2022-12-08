@@ -10,7 +10,8 @@ import {
   ScrollView,
   Modal,
 } from 'react-native';
-import {CreditCardInput} from 'react-native-credit-card-input';
+
+import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input-plus";
 
 import LottieView from 'lottie-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';

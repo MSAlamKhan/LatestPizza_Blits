@@ -378,11 +378,11 @@ export const CartStackNavigator = () => {
         name="thankyou"
         component={ThankYou}
       />
-      {/* <CartStack.Screen
+      <CartStack.Screen
         options={{headerShown: false, tabBarStyle: {display: 'none'}}}
         name="payWithStripe"
         component={PayWithStripe}
-      /> */}
+      />
       {/* <CartStack.Screen
         options={{headerShown: false}}
         name="addAddress"

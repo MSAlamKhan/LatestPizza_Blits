@@ -1,10 +1,8 @@
 import {StyleSheet, Text, View, ScrollView} from 'react-native';
 import React, {useState, useContext} from 'react';
 import CommonButton from '../components/CommonButton';
-
 import Colors from '../constants/Colors';
 import {AuthContext} from '../context/Auth';
-
 import {APIURL} from '../constants/Url';
 import Toast from 'react-native-simple-toast';
 import Input from '../components/Input';
@@ -13,6 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../components/Animatedfullscreen/Loader';
 import LottieView from 'lottie-react-native';
 import {color} from 'react-native-reanimated';
+
 export default function AddPhoneNumber({navigation}) {
   // const [phoneNo, setPhoneNo] = useState('222222');
   // const {setIsSignin} = useContext(AuthContext);

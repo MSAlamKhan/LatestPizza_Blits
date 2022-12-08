@@ -28,9 +28,9 @@ const AmmoutModal = props => {
     <Modal
       isVisible={props.isVisible}
       onBackButtonPress={props.onBackButtonPress}
-      //   onBackButtonPress={() => setModalVisible(false)}
+        // onBackButtonPress={() => setModalVisible(false)}
       onBackdropPress={props.onBackdropPress}
-      //   onBackdropPress={() => setModalVisible(false)}
+        // onBackdropPress={() => setModalVisible(false)}
       style={styles.MainViewModal}
       animationIn="slideInRight"
       animationOut="slideOutLeft"

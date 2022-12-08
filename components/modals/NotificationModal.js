@@ -40,7 +40,7 @@ export function NotificationModal({isVisible, onClose, message, onPress}) {
             />
           </View>
 
-          {/* <Text
+          <Text
             style={{
               // textAlign: 'center',
               paddingHorizontal: 10,
@@ -49,7 +49,7 @@ export function NotificationModal({isVisible, onClose, message, onPress}) {
               marginTop: 10,
             }}>
             {message}
-          </Text> */}
+          </Text>
           <AutoSizeText
             style={{
               // textAlign: 'center',
@@ -83,7 +83,7 @@ export function NotificationModal({isVisible, onClose, message, onPress}) {
             onPress={onPress}
             title={language.proceedToCheckOut}
           />
-          {/* <Text style={{fontSize: 15}}>Product Added To Card</Text> */}
+          <Text style={{fontSize: 15}}>Product Added To Card</Text>
         </View>
       </View>
     </Modal>

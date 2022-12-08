@@ -1,9 +1,9 @@
 import React from 'react';
 import Colors from '../../constants/Colors';
-import SelectList from 'react-native-dropdown-select-list';
+import {SelectList} from 'react-native-dropdown-select-list';
 import {StyleSheet} from 'react-native';
 
-export default function DropDownSelector(props) {
+const DropDownSelector = (props) =>  {
   return (
     <SelectList
       onSelect={props.onSelect}
@@ -49,3 +49,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 });
+
+
+export default DropDownSelector;

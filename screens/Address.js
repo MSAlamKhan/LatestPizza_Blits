@@ -102,7 +102,8 @@ export const Address = ({route}) => {
   const check_payment = () => {
     // console.log(price > parseFloat(selectPaymentTypes.min_order_price))
     if (PaymentType == '') {
-      alert(language.selectAnyAddress);
+      // alert(language.selectAnyAddress);
+      navigation.navigate('paymentMethod', {price, selectPaymentTypes});
     } else {
       if (price >= parseFloat(selectPaymentTypes.min_order_price)) {
         navigation.navigate('paymentMethod', {price, selectPaymentTypes});

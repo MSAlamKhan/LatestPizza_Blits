@@ -116,7 +116,6 @@ const ProductDetails = ({ route, navigation }) => {
       const eliminateDuplicate = updatedItems.filter(
         (e, i, a) => a.indexOf(e) === i,
       );
-
       setRecentlyView(eliminateDuplicate);
       await AsyncStorage.setItem(
         `recentlyView${userID}`,
@@ -130,9 +129,7 @@ const ProductDetails = ({ route, navigation }) => {
     if (index === -1) {
       // make a copy of the index array to mutate
       const updatedItems = [...wishlist];
-
       updatedItems.push(productData.id);
-
       AsyncStorage.setItem(
         `wishList${userDetails.user_id}`,
         JSON.stringify(updatedItems),

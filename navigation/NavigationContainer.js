@@ -7,7 +7,7 @@ import {
 } from './Navigation';
 
 import {AuthContext} from '../context/Auth';
-// import OneSignal from 'react-native-onesignal';
+import OneSignal from 'react-native-onesignal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // import AddPhoneNumber from '../screens/AddPhoneAndEmail';
@@ -15,14 +15,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import ThankYou from '../screens/ThankYou';
 
 const AppNavigationContainer = () => {
-  // OneSignal.addSubscriptionObserver(async event => {
-  //   console.log('OneSignal: subscription changed to userId:', event.to);
-  //   if (event.to.isSubscribed) {
-  //     const state = await OneSignal.getDeviceState();
-  //     console.log('push Token', state.userId);
-  //     AsyncStorage.setItem('deviceToken', state.userId);
-  //   }
-  // });
+  OneSignal.addSubscriptionObserver(async event => {
+    console.log('OneSignal: subscription changed to userId:', event.to);
+    if (event.to.isSubscribed) {
+      const state = await OneSignal.getDeviceState();
+      console.log('push Token', state.userId);
+      AsyncStorage.setItem('deviceToken', state.userId);
+    }
+  });
   const {
     getUserDetails,
     setRole,

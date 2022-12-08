@@ -1,6 +1,8 @@
 package com.pizzablitznew;
 
+import android.os.Bundle; 
 import com.facebook.react.ReactActivity;
+import org.devio.rn.splashscreen.SplashScreen; 
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 
@@ -20,6 +22,13 @@ public class MainActivity extends ReactActivity {
    * you can specify the renderer you wish to use - the new renderer (Fabric) or the old renderer
    * (Paper).
    */
+  @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);  // here
+        super.onCreate(savedInstanceState);
+    }
+
+
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new MainActivityDelegate(this, getMainComponentName());

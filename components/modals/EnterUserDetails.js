@@ -25,7 +25,7 @@ const EnterUserDetails = props => {
     selected,
     setSelected,
   } = useContext(AuthContext);
-
+      console.log(language  , "cespojkdviodj")
   const {
     control,
     register,
@@ -102,11 +102,11 @@ const EnterUserDetails = props => {
           placeholder={language.shippingAddress2}
           textStyle={{color: '#000'}}
         />
-        {/* {errors.Shipping_address_2 && (
+        {errors.Shipping_address_2 && (
           <Text style={styles.errormessage}>
             {errors.Shipping_address_2.message}
           </Text>
-        )} */}
+        )}
         <Input
           name="Shipping_city"
           control={control}
@@ -160,8 +160,7 @@ const EnterUserDetails = props => {
           <Text style={styles.errormessage}>
             {errors.Shipping_state.message}
           </Text>
-        )}
-
+        )} 
         <Controller
           control={control}
           name="postalCode"
@@ -174,7 +173,7 @@ const EnterUserDetails = props => {
               <DropDownSelector
                 setSelected={onChange}
                 data={props.gerAreas}
-                placeholder={language.shippingPostalCode}
+                placeholder={language?.shippingPostalCode}
               />
             );
           }}
@@ -183,11 +182,11 @@ const EnterUserDetails = props => {
           <Text style={styles.errormessage}>{errors.postalCode.message}</Text>
         )}
 
-        {/* <DropDownSelector
+              <DropDownSelector
           setSelected={setSelected}
           data={props.gerAreas}
-          placeholder={'Postal Code'}
-        /> */}
+          placeholder='Postal Code'
+        />  
 
         <CommonButton
           style={{marginTop: 30, marginHorizontal: 70}}

@@ -36,10 +36,10 @@ const Dashboard = () => {
 
   const [isLoading, setLoading] = useState(true);
   const [productItem, setProductItem] = useState([]);
+  const [productItemVariation, setProductItemVariation] = useState([]);
   const [discount, setDiscount] = useState([]);
   const [initialDiscountarayyIndex, setInitialDiscountarayyIndex] = useState(0);
   const [lastDiscountarayyIndex, setLastDiscountarayyIndex] = useState(9);
-
   const [tenDiscountItems, setTenDiscountItems] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [categorySliderImages, setCatategorySliderImages] = useState([]);
@@ -65,7 +65,7 @@ const Dashboard = () => {
 
       const responseData = await response.json();
       const Success = responseData?.success;
-      console.log('discount', responseData)
+      // console.log('discount', responseData)
       if (Success === false) {
         // throw new Error(responseData.Message);
       } else {
@@ -130,14 +130,14 @@ const Dashboard = () => {
       initialDiscountarayyIndex,
       lastDiscountarayyIndex,
     );
-    console.log('tenItem=================>', tenItems)
+   
 
     setTenDiscountItems([...tenDiscountItems, ...tenItems]);
   };
 
   const recentlyViewApi = async recent => {
     setLoading(true);
-    console.log(recent);
+    // console.log(recent);
     try {
       let base_url = `${APIURL}/API/get_products_by_idzz.php`;
 
@@ -160,7 +160,7 @@ const Dashboard = () => {
       });
 
       const responseData = await response.json();
-
+            console.log(responseData.Data , "newApi" )
       const Success = responseData?.success;
 
       if (Success === false) {
@@ -200,7 +200,68 @@ const Dashboard = () => {
       }
     } catch (error) {
       // Alert.alert(error.message);
-      console.log('recent error===>', error);
+      // console.log('recent error===>', error);
+    }
+    setLoading(false);
+  };
+
+
+  const get_variation  = async recent => {
+    setLoading(true);
+    console.log(recent);
+    try {
+      let base_url = `${APIURL}/API/get_variation.php `;
+      let form = new FormData();
+      form.append(
+        'token',
+        'as23rlkjadsnlkcj23qkjnfsDKJcnzdfb3353ads54vd3favaeveavgbqaerbVEWDSC',
+      );
+      form.append('product_id', 49);
+      const response = await fetch(base_url, {
+        method: 'post',
+        body: form,
+      });
+      const responseData = await response.json();
+      console.log(responseData , "Talha" )
+      const Success = responseData?.success;
+      if (Success === false) {
+        // throw new Error(responseData.Message);
+      } else {
+        const productDetails = responseData.Data;
+        // console.log(productDetails , "los")
+        const productItemsVariations = productDetails.map(item => ({
+          name: item.name,
+          description: item.description,
+          actualPrice: parseFloat(item.price).toFixed(0),
+          price: parseFloat(
+            (
+              parseFloat(item.price) -
+              parseFloat(item.price) * (parseFloat(item.discount) / 100)
+            ).toFixed(2),
+          ),
+
+          id: parseInt(item.id),
+          quantity: 0,
+          discount: parseInt(item.discount),
+          qty: item.qty,
+          image: item.image,
+          sub_category_id: item.sub_category_id,
+          addons: item.addons.map(item => ({
+            ...item,
+            quantity: 0,
+            sum: 0,
+          })),
+          dressing: item.dressing,
+          type: item.types,
+        }));
+
+        // const waitingforAsync = await getrecentyview();
+          //  console.log(productItemsVariations)
+        setProductItemVariation(productItemsVariations);
+      }
+    } catch (error) {
+      // Alert.alert(error.message);
+      // console.log('recent error===>', error);
     }
     setLoading(false);
   };
@@ -210,6 +271,7 @@ const Dashboard = () => {
     const recentlyViewed = await AsyncStorage.getItem(`recentlyView${userID}`);
 
     recentlyViewApi(JSON.parse(recentlyViewed));
+    get_variation(JSON.parse(recentlyViewed));
   };
 
   const getSubCategory = useCallback(async () => {
@@ -231,7 +293,7 @@ const Dashboard = () => {
 
       const responseData = await response.json();
       const Success = responseData?.success;
-
+     
       if (Success == false) {
         throw new Error(responseData.Message);
       } else {
@@ -340,14 +402,19 @@ const Dashboard = () => {
     getCategorySlider();
     DiscountProducts();
     GetAllDeal();
+    get_variation() 
+    recentlyViewApi()
   }, []);
   useFocusEffect(
+    
     useCallback(() => {
       getrecentyview();
       // recentlyViewApi();
       // DiscountProducts();
       getSubCategory();
-    }, []),
+   
+    }
+    , []),
   );
 
   return isLoading ? (
@@ -480,6 +547,7 @@ const Dashboard = () => {
               ImageComponentStyle={{ width: '95%', marginTop: 5 }}
               imageLoadingColor={Colors.primary}
             /> */}
+            
             <Text style={styles.recentlyViewProductsText}>
               {language.recentlyViewProduct}
             </Text>
@@ -502,6 +570,32 @@ const Dashboard = () => {
                 })}
               </View>
             )}
+              {/* varient  */}
+              <Text style={styles.recentlyViewProductsText}>
+              {language.deals}
+            </Text>
+            {productItemVariation.length == 0 ? (
+              <Text style={styles.noItemText}>{language.noDeals}</Text>
+            ) : (
+              <View style={styles.recentlyViewProducts}>
+                {productItemVariation?.map((item, index) => {
+                  return (
+                    <ViewProducts
+                      onPress={() =>
+                        navigation.navigate('dealsDetail', {
+                          product: { item },
+                        })
+                      }
+                      key={index}
+                      data={item}
+                    />
+                  );
+                })}
+              </View>
+            )}
+
+
+                {/* varient */}
             <Text style={styles.recentlyViewProductsText}>
               {language.deals}
             </Text>
