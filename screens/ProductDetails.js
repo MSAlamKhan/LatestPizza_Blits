@@ -42,55 +42,58 @@ const ProductDetails = ({ route, navigation }) => {
     setCart,
   } = useContext(AuthContext);
   const { product } = route.params;
-
-  const productItem = product.item;
-
-  const [productData, setProductData] = useState(productItem);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [updatedId , setUpdatedId] = useState(product);
+  const [productData, setProductData] = useState();
   const [imageLoading, setImageLoading] = useState(true);
-
-  // const [itemsValue, setItemsValue] = useState({
-  //   items: [],
-  //   addonstotalAmount: 0,
-  // });
+  const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState({
     items: [],
     addonstotalAmount: 0,
   });
+  const [addons, setaddons] = useState();
   const [selectedDressing, setSelectedDressing] = useState([]);
   const [selectedType, setSelectedType] = useState({});
+  const [variations , setVariations] = useState();
+  const getProductDetails = async () => {
 
-  useFocusEffect(
-    useCallback(() => {
-      recentlyViewItem();
-    }, []),
-  );
-  // React.useEffect(
-  //   () =>
-  //     navigation.addListener('beforeRemove', e => {
-  //       // Prevent default behavior of leaving the screen
-  //       e.preventDefault();
+    try {
+      let base_url = `${APIURL}/API/get_further_product_byid.php`;
 
-  //       // Prompt the user before leaving the screen
-  //     }),
-  //   [navigation],
-  // );
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     cart.items.map(item => {
-  //       if (item.id === productItem?.id) {
-  //         setProductData(item);
-  //       }
-  //     });
-  //   }, [cart, productItem?.id]),
-  // );
+      let form = new FormData();
 
-  // const [productData, setProductData] = useState(productItem);
-  const [addons, setaddons] = useState({
-    items: [productData?.addons[0]?.ao_data],
-    addonstotalAmount: 0,
-  });
+      form.append(
+        'token',
+        'as23rlkjadsnlkcj23qkjnfsDKJcnzdfb3353ads54vd3favaeveavgbqaerbVEWDSC',
+      );
+      form.append('product_id',updatedId);
+      const response = await fetch(base_url, {
+        method: 'post',
+        body: form,
+      });
+
+      const responseData = await response.json();
+            
+      const Success = responseData?.Status;
+      if(Success){
+        console.log("Zee : ",responseData.Data )
+        setProductData(responseData.Data)
+        setaddons({
+          items: [responseData.Data?.addons[0]?.ao_data],
+          addonstotalAmount: 0,
+        })
+        recentlyViewItem();
+      }
+
+  
+    } catch (error) {
+      // Alert.alert(error.message);
+      // console.log('recent error===>', error);
+    }
+   
+  };
+
   console.log('userDetails.user_id', userDetails.user_id);
+ 
   const recentlyViewItem = async () => {
     const index = recentlyView.findIndex(item => item === productData.id);
     const userID = userDetails.user_id ? userDetails.user_id : 999999999999;
@@ -116,6 +119,7 @@ const ProductDetails = ({ route, navigation }) => {
       const eliminateDuplicate = updatedItems.filter(
         (e, i, a) => a.indexOf(e) === i,
       );
+
       setRecentlyView(eliminateDuplicate);
       await AsyncStorage.setItem(
         `recentlyView${userID}`,
@@ -129,7 +133,9 @@ const ProductDetails = ({ route, navigation }) => {
     if (index === -1) {
       // make a copy of the index array to mutate
       const updatedItems = [...wishlist];
+
       updatedItems.push(productData.id);
+
       AsyncStorage.setItem(
         `wishList${userDetails.user_id}`,
         JSON.stringify(updatedItems),
@@ -149,7 +155,34 @@ const ProductDetails = ({ route, navigation }) => {
     }
   };
 
-  ////contexy api
+  const getVariations = async()=>{
+    try {
+      let base_url = `${APIURL}/API/get_variations_zee.php`;
+
+      let form = new FormData();
+
+      form.append(
+        'token',
+        'as23rlkjadsnlkcj23qkjnfsDKJcnzdfb3353ads54vd3favaeveavgbqaerbVEWDSC',
+      );
+      form.append('product_id',updatedId);
+      const response = await fetch(base_url, {
+        method: 'post',
+        body: form,
+      });
+
+      const responseData = await response.json();
+        if(responseData.status == true){
+          console.log("Variation Data : ", responseData.data)
+          setVariations(responseData.data);
+        }    
+      
+  
+    } catch (error) {
+      // Alert.alert(error.message);
+      // console.log('recent error===>', error);
+    }
+  }
 
   const AddProduct = () => {
     const productDataArray = [productData];
@@ -287,9 +320,19 @@ const ProductDetails = ({ route, navigation }) => {
     }
   };
 
-  return (
+  useFocusEffect(useCallback(()=>{
+    getProductDetails()
+    getVariations()
+  },[updatedId]))
+
+// useEffect(()=>{
+//     getProductDetails()
+//     getVariations()
+// },[updatedId])
+
+  return(
     <View style={styles.container}>
-      <Modal
+<Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -358,7 +401,6 @@ const ProductDetails = ({ route, navigation }) => {
                             style={{
                               // justifyContent: 'space-between',
                               flexDirection: 'row',
-
                               // width: '77%',
                             }}>
                             <Text
@@ -643,7 +685,7 @@ const ProductDetails = ({ route, navigation }) => {
           </View>
         </View>
       </Modal>
-      <View style={[styles.header]}>
+<View style={[styles.header]}>
         <Image
           // resizeMode="cover"
           onLoad={() => {
@@ -657,7 +699,7 @@ const ProductDetails = ({ route, navigation }) => {
           ]}
           resizeMode="cover"
           source={{
-            uri: `${APIURL}/admin_panel/Uploads/${productItem?.image}`,
+            uri: `${APIURL}/admin_panel/Uploads/${productData?.image}`,
           }}
         />
         <ActivityIndicator
@@ -675,14 +717,14 @@ const ProductDetails = ({ route, navigation }) => {
             color={'rgba(255,255,255,0.7)'}
           />
         </TouchableOpacity>
-        {productItem?.discount == 0 ? null : <View style={styles.discountContainer}>
-          <Text style={styles.discontText}>- {productItem?.discount}%</Text>
+        {productData?.discount == 0 ? null : <View style={styles.discountContainer}>
+          <Text style={styles.discontText}>- {productData?.discount}%</Text>
         </View>}
 
       </View>
-      <View style={styles.lowerlayout}>
+<View style={styles.lowerlayout}>
         <View style={styles.nameConatiner}>
-          <Text style={styles.productName}>{productItem?.name}</Text>
+          <Text style={styles.productName}>{productData?.name}</Text>
         </View>
 
         <FontAwesome
@@ -706,21 +748,67 @@ const ProductDetails = ({ route, navigation }) => {
 
         <View style={styles.priceContainer}>
           <Text style={styles.productPrice}>
-            €{productItem?.price}{' '}
-            {productItem?.discount == 0 ? null : <Text style={styles.actualPriceText}>
-              {productItem?.actualPrice}
+            €{productData?.price}{' '}
+            {productData?.discount == 0 ? null : <Text style={styles.actualPriceText}>
+              {productData?.actualPrice}
             </Text>}
           </Text>
         </View>
-        {/* <View>
-          {productData.addons.map(items => {
-            return <Text key={items.id}>sdasdasdsadsadsas</Text>;
-          })}
-        </View> */}
-
+     {/* zee */}
+     <Text
+     style={{
+      marginLeft:10,
+      marginBottom:5,
+      fontSize:18
+     }}
+     >
+      Variations
+     </Text>
+         <FlatList
+          data={variations}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={item => item.product_id}
+          renderItem={({item})=>{
+            return(
+              <View
+              style={{
+                height:120
+              }}
+              >
+              <TouchableOpacity
+              onPress={()=>{
+                setUpdatedId(item.product_id);
+                
+              }}
+              style={{
+                backgroundColor: item.product_id == updatedId ? 'red' : 'green',
+                width:200,
+                marginLeft : 10,
+                height : 50,
+                borderRadius:10,
+                marginBottom:10,
+                justifyContent:'center'
+              }}
+              >
+        
+          <Text
+          style={{
+            color : '#ffffff',
+            fontSize : 16,
+            alignSelf:'center'
+          }}
+          >{item.sub_title}</Text>
+    
+          </TouchableOpacity>
+            </View>
+            )
+          }}
+         />
+        
         <ScrollView style={{ height: '70%', marginBottom: 10 }}>
           <Text style={styles.productDescription}>
-            {productItem?.description}
+            {productData?.description}
           </Text>
         </ScrollView>
         {/* <CommonButton onPress={() => AddProduct} title="Add to Cart" /> */}
@@ -733,7 +821,8 @@ const ProductDetails = ({ route, navigation }) => {
       </View>
     </View>
   );
-};
+}
+
 
 const styles = StyleSheet.create({
   //modal

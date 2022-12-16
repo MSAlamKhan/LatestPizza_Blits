@@ -44,10 +44,10 @@ const Dashboard = () => {
   const [subCategory, setSubCategory] = useState([]);
   const [categorySliderImages, setCatategorySliderImages] = useState([]);
   const [dealData, setDealData] = useState([]);
-
+  console.log(productItem , "logo" )
   const DiscountProducts = async recent => {
     setLoading(true);
-
+ 
     try {
       let base_url = `${APIURL}/API/productlist_by_discount.php`;
 
@@ -196,7 +196,7 @@ const Dashboard = () => {
 
         // const waitingforAsync = await getrecentyview();
 
-        setProductItem(productItems);
+        setProductItem(responseData.Data);
       }
     } catch (error) {
       // Alert.alert(error.message);
@@ -206,72 +206,13 @@ const Dashboard = () => {
   };
 
 
-  const get_variation  = async recent => {
-    setLoading(true);
-    console.log(recent);
-    try {
-      let base_url = `${APIURL}/API/get_variation.php `;
-      let form = new FormData();
-      form.append(
-        'token',
-        'as23rlkjadsnlkcj23qkjnfsDKJcnzdfb3353ads54vd3favaeveavgbqaerbVEWDSC',
-      );
-      form.append('product_id', 49);
-      const response = await fetch(base_url, {
-        method: 'post',
-        body: form,
-      });
-      const responseData = await response.json();
-      console.log(responseData , "Talha" )
-      const Success = responseData?.success;
-      if (Success === false) {
-        // throw new Error(responseData.Message);
-      } else {
-        const productDetails = responseData.Data;
-        // console.log(productDetails , "los")
-        const productItemsVariations = productDetails.map(item => ({
-          name: item.name,
-          description: item.description,
-          actualPrice: parseFloat(item.price).toFixed(0),
-          price: parseFloat(
-            (
-              parseFloat(item.price) -
-              parseFloat(item.price) * (parseFloat(item.discount) / 100)
-            ).toFixed(2),
-          ),
 
-          id: parseInt(item.id),
-          quantity: 0,
-          discount: parseInt(item.discount),
-          qty: item.qty,
-          image: item.image,
-          sub_category_id: item.sub_category_id,
-          addons: item.addons.map(item => ({
-            ...item,
-            quantity: 0,
-            sum: 0,
-          })),
-          dressing: item.dressing,
-          type: item.types,
-        }));
-
-        // const waitingforAsync = await getrecentyview();
-          //  console.log(productItemsVariations)
-        setProductItemVariation(productItemsVariations);
-      }
-    } catch (error) {
-      // Alert.alert(error.message);
-      // console.log('recent error===>', error);
-    }
-    setLoading(false);
-  };
 
   const getrecentyview = async () => {
     const userID = userDetails.user_id ? userDetails.user_id : 999999999999;
     const recentlyViewed = await AsyncStorage.getItem(`recentlyView${userID}`);
 
     recentlyViewApi(JSON.parse(recentlyViewed));
-    get_variation(JSON.parse(recentlyViewed));
   };
 
   const getSubCategory = useCallback(async () => {
@@ -402,16 +343,18 @@ const Dashboard = () => {
     getCategorySlider();
     DiscountProducts();
     GetAllDeal();
-    get_variation() 
     recentlyViewApi()
+
+    getrecentyview();
+    getSubCategory();
   }, []);
   useFocusEffect(
     
     useCallback(() => {
-      getrecentyview();
+      
       // recentlyViewApi();
       // DiscountProducts();
-      getSubCategory();
+      
    
     }
     , []),
@@ -571,10 +514,10 @@ const Dashboard = () => {
               </View>
             )}
               {/* varient  */}
-              <Text style={styles.recentlyViewProductsText}>
+              {/* <Text style={styles.recentlyViewProductsText}>
               {language.deals}
-            </Text>
-            {productItemVariation.length == 0 ? (
+            </Text> */}
+            {/* {productItemVariation.length == 0 ? (
               <Text style={styles.noItemText}>{language.noDeals}</Text>
             ) : (
               <View style={styles.recentlyViewProducts}>
@@ -592,7 +535,7 @@ const Dashboard = () => {
                   );
                 })}
               </View>
-            )}
+            )} */}
 
 
                 {/* varient */}
@@ -626,11 +569,12 @@ const Dashboard = () => {
             ) : (
               <View style={styles.recentlyViewProducts}>
                 {tenDiscountItems?.map((item, index) => {
+                  console.log("ZZZAAA : ", item);
                   return (
                     <ViewProducts
                       onPress={() =>
                         navigation.navigate('productDetail', {
-                          product: { item },
+                          product:item.id 
                         })
                       }
                       key={index}

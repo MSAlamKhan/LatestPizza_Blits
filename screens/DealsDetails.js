@@ -686,11 +686,9 @@ const ProductDetails = ({ route, navigation }) => {
       </View>
       {addonsPrice > 0 && (
         <Text style={styles.addonsPriceText}>
-          {' '}
           {language.totalAddonsPrice}:{addonsPrice}
         </Text>
       )}
-
       <CommonButton onPress={() => AddDealsItem()} title={language.addToCart} />
     </View>
   );

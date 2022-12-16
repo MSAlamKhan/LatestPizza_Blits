@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: 'Roboto-Bold',
     fontSize: 12,
+    color:"black"
   },
   price: {
     fontFamily: 'Roboto-light',

@@ -105,7 +105,7 @@ const ProductList = ({ route, navigation }) => {
     <View style={styles.container}>
       <View style={styles.upperLayout}>
         <View style={styles.headerContainer}>
-          <Text style={styles.title}>{categoryname.toUpperCase()}</Text>
+          <Text style={styles.title}>{categoryname}</Text>
           <Ionicons color={Colors.textColor} name="search" size={20} />
         </View>
       </View>

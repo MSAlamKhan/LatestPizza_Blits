@@ -13,9 +13,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Colors from '../constants/Colors';
 import {AuthContext} from '../context/Auth';
 
+
 const CustomDrawer = props => {
   const {isAuthenticated, Logout, isLoading} = useContext(AuthContext);
-
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props} style={styles.drawerContent}>

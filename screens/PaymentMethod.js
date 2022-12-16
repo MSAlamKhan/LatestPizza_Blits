@@ -296,25 +296,25 @@ export const PaymentMethod = ({route}) => {
     }
     // setLoading(false);
   };
-  // const payWithPaypal = async () => {
-  //   try {
-  //     const {nonce, payerId, email, firstName, lastName, phone} =
-  //       await requestOneTimePayment(paypalToken, {
-  //         amount: price + shippingcost, // required
-  //         // any PayPal supported currency (see here: https://developer.paypal.com/docs/integration/direct/rest/currency-codes/#paypal-account-payments)
-  //         currency: 'EUR',
-  //         // any PayPal supported locale (see here: https://braintree.github.io/braintree_ios/Classes/BTPayPalRequest.html#/c:objc(cs)BTPayPalRequest(py)localeCode)
-  //         localeCode: 'en_GB',
-  //         shippingAddressRequired: false,
-  //         userAction: 'Pay Now', // display 'Pay Now' on the PayPal review page
-  //         // one of 'authorize', 'sale', 'order'. defaults to 'authorize'. see details here: https://developer.paypal.com/docs/api/payments/v1/#payment-create-request-body
-  //         intent: 'authorize',
-  //       });
-  //     GetPaymentStatus(nonce);
-  //   } catch (e) {
-  //     Toast.show(`${e}`, Toast.LONG);
-  //   }
-  // };
+  const payWithPaypal = async () => {
+    try {
+      const {nonce, payerId, email, firstName, lastName, phone} =
+        await requestOneTimePayment(paypalToken, {
+          amount: price + shippingcost, // required
+          // any PayPal supported currency (see here: https://developer.paypal.com/docs/integration/direct/rest/currency-codes/#paypal-account-payments)
+          currency: 'EUR',
+          // any PayPal supported locale (see here: https://braintree.github.io/braintree_ios/Classes/BTPayPalRequest.html#/c:objc(cs)BTPayPalRequest(py)localeCode)
+          localeCode: 'en_GB',
+          shippingAddressRequired: false,
+          userAction: 'Pay Now', // display 'Pay Now' on the PayPal review page
+          // one of 'authorize', 'sale', 'order'. defaults to 'authorize'. see details here: https://developer.paypal.com/docs/api/payments/v1/#payment-create-request-body
+          intent: 'authorize',
+        });
+      GetPaymentStatus(nonce);
+    } catch (e) {
+      Toast.show(`${e}`, Toast.LONG);
+    }
+  };
 
   const HandlerSubmit = () => {
     if (SelectType === 'Wallet') {
@@ -360,7 +360,6 @@ export const PaymentMethod = ({route}) => {
         <Text style={[styles.paymentmethod, styles.extrapaymentmethod]}>
           {language.ChooseDesiredPaymentMethod}
         </Text>
-
         {paymentMethodsData.map((item, index) => {
           return (
             <TouchableOpacity
@@ -381,7 +380,7 @@ export const PaymentMethod = ({route}) => {
               <item.IconCategory
                 style={{paddingRight: 10}}
                 name={item.IconName}
-                size={item.size}
+                size={item.size}  
                 color={Colors.primary}
               />
               <Text style={styles.paymentpyby}>{item.name}</Text>

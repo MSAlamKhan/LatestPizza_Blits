@@ -27,6 +27,8 @@ import Colors from '../constants/Colors';
 
 import SubCategories from '../screens/SubCategories';
 import ProductList from '../screens/ProductList';
+import ProductVariant from '../screens/ProductVariant';
+import ProductVariation from '../screens/ProductVariation';
 import ProductDetails from '../screens/ProductDetails';
 import Search from '../screens/Search';
 import RegisterForm from '../screens/RegisterForm';
@@ -305,6 +307,17 @@ export const CategoryStackNavigator = () => {
         name="productList"
         component={ProductList}
       />
+        <CategoryStack.Screen
+        options={{headerShown: false}}
+        name="ProductVariant"
+        component={ProductVariant}
+      />
+      <CategoryStack.Screen
+        options={{headerShown: false}}
+        name="ProductVariation"
+        component={ProductVariation}
+      />
+      
       <CategoryStack.Screen
         options={{headerShown: false}}
         name="productDetail"
@@ -331,6 +344,16 @@ export const DashBoardStackNavigator = () => {
         options={{headerShown: false}}
         name="productList"
         component={ProductList}
+      />
+      <DashBoardStack.Screen
+        options={{headerShown: false}}
+        name="ProductVariant"
+        component={ProductVariant}
+      />
+      <DashBoardStack.Screen
+        options={{headerShown: false}}
+        name="ProductVariation"
+        component={ProductVariation}
       />
       <DashBoardStack.Screen
         options={{headerShown: false}}

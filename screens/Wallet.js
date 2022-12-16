@@ -23,7 +23,6 @@ import AmmoutModal from '../components/modals/AmmoutModal';
 // } from 'react-native-paypal';
 const Wallet = () => {
   const {userDetails, language, paypalToken} = useContext(AuthContext);
-
   const [modalVisible, setModalVisible] = useState(false);
   const [amount, setAmount] = useState();
   const [loading, setLoading] = useState(false);
@@ -57,9 +56,7 @@ const Wallet = () => {
         method: 'post',
         body: form,
       });
-
       const responseData = await response.json();
-
       if (responseData.status == true) {
         setAmount(responseData.Data.amount);
         setName(responseData.Data.name);
@@ -95,7 +92,6 @@ const Wallet = () => {
       form.append('transaction_type', 'credit');
       form.append('gateway', 'paypal');
       form.append('transaction_message', `${amount} credit to your account `);
-
       // eslint-disable-next-line no-undef
       const response = await fetch(base_url, {
         method: 'post',
@@ -104,7 +100,6 @@ const Wallet = () => {
 
       const responseData = await response.json();
       console.log('tranction', responseData);
-
       if (responseData.status) {
         getUserDetail();
       } else {
