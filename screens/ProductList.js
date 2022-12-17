@@ -147,7 +147,7 @@ const ProductList = ({ route, navigation }) => {
                     <ViewProducts
                       onPress={() =>
                         navigation.navigate('productDetail', {
-                          product: { item },
+                          product:  item.id ,
                         })
                         // console.log(item)
                       }

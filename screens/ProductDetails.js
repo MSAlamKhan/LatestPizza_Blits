@@ -74,14 +74,46 @@ const ProductDetails = ({ route, navigation }) => {
       const responseData = await response.json();
             
       const Success = responseData?.Status;
-      if(Success){
-        console.log("Zee : ",responseData.Data )
-        setProductData(responseData.Data)
+      if(Success == false){
+       
+        // recentlyViewItem();
+      }else{
+        const productDetails = responseData.Data;
+        
+        const discountItems = {
+          name: productDetails.name,
+          description: productDetails.description,
+          actualPrice: parseFloat(productDetails.price).toFixed(1),
+          price: parseFloat(
+            (
+              parseFloat(productDetails.price) -
+              (parseFloat(productDetails.price) * (parseFloat(productDetails.discount) / 100))
+            ).toFixed(2),
+          ),
+
+          id: parseInt(productDetails.id),
+          quantity: 0,
+          discount: parseInt(productDetails.discount),
+          sum: 0,
+          qty: productDetails.qty,
+          image: productDetails.image,
+          sub_category_id: productDetails.sub_category_id,
+          addons: productDetails.addons.map(item => ({
+            ...item,
+            quantity: 0,
+            sum: 0,
+          })),
+          dressing: productDetails.dressing,
+          type: productDetails.type,
+          // dressing: item.dressing,
+          // type: item.types,
+        };
+        console.log("Zee : ",discountItems )
+        setProductData(discountItems)
         setaddons({
-          items: [responseData.Data?.addons[0]?.ao_data],
+          items: [discountItems?.addons[0]?.ao_data],
           addonstotalAmount: 0,
         })
-        recentlyViewItem();
       }
 
   
@@ -95,37 +127,41 @@ const ProductDetails = ({ route, navigation }) => {
   console.log('userDetails.user_id', userDetails.user_id);
  
   const recentlyViewItem = async () => {
-    const index = recentlyView.findIndex(item => item === productData.id);
-    const userID = userDetails.user_id ? userDetails.user_id : 999999999999;
+    const index = recentlyView.findIndex(item => item === updatedId);
 
     if (recentlyView.length < 6) {
       if (index === -1) {
         // make a copy of the index array to mutate
         const updatedItems = [...recentlyView];
-        updatedItems.unshift(productData.id);
+
+        updatedItems.unshift(updatedId);
         const eliminateDuplicate = updatedItems.filter(
           (e, i, a) => a.indexOf(e) === i,
         );
+
+        // console.log(updatedItems);
         setRecentlyView(eliminateDuplicate);
         await AsyncStorage.setItem(
-          `recentlyView${userID}`,
+          `recentlyView${userDetails.user_id}`,
           JSON.stringify(eliminateDuplicate),
         );
       }
     } else {
       recentlyView.pop();
       const updatedItems = [...recentlyView];
-      updatedItems.unshift(productData.id);
+      updatedItems.unshift(updatedId);
       const eliminateDuplicate = updatedItems.filter(
         (e, i, a) => a.indexOf(e) === i,
       );
-
+      // console.log(updatedItems);
       setRecentlyView(eliminateDuplicate);
       await AsyncStorage.setItem(
-        `recentlyView${userID}`,
+        `recentlyView${userDetails.user_id}`,
         JSON.stringify(eliminateDuplicate),
       );
     }
+    // const jsonValue = JSON.stringify(recentlyView);
+    // console.log(recentlyView);
   };
   const addToWishList = async () => {
     const index = wishlist.findIndex(item => item === productData.id);
@@ -204,7 +240,7 @@ const ProductDetails = ({ route, navigation }) => {
       if (productData.quantity < productData.qty);
       Toast.show(` ${productItem[0].name} added to Cart`, Toast.SHORT);
       // console.log('selected type', selectedType);
-      // console.log('productItem', productItem[0]);
+       console.log('productItem', productItem[0]);
       // console.log(cart);
       AddCart(productItem[0]);
       setModalVisible(false);
@@ -321,8 +357,13 @@ const ProductDetails = ({ route, navigation }) => {
   };
 
   useFocusEffect(useCallback(()=>{
+    setProductData();
+    
+
+
     getProductDetails()
     getVariations()
+    recentlyViewItem();
   },[updatedId]))
 
 // useEffect(()=>{
@@ -762,7 +803,7 @@ const ProductDetails = ({ route, navigation }) => {
       fontSize:18
      }}
      >
-      Variations
+      {language.variation}
      </Text>
          <FlatList
           data={variations}

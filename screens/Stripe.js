@@ -240,7 +240,7 @@ const Stripe = ({route}) => {
       onSubmit(values);
     };
     useEffect(() => {
-      tranction()
+
     }, [])
 
   return loading ? (

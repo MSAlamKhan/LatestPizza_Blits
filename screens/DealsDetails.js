@@ -28,6 +28,7 @@ import { Checkbox } from 'react-native-paper';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropDownPicker from 'react-native-dropdown-picker';
 import SelectDealsModal from '../components/modals/SelectDeals';
+import { clockRunning } from 'react-native-reanimated';
 const ProductDetails = ({ route, navigation }) => {
   const {
     isSignin,
@@ -662,10 +663,13 @@ const ProductDetails = ({ route, navigation }) => {
                           }
                           key={(item, index) => index}
                           renderItem={({ item }) => {
+                            {
+                              console.log("CCC : ",item)
+                            }
                             return (
                               <View
                                 style={styles.selectedCategoriesInnerContainer}>
-                                <Text>{item.dressing_title}</Text>
+                                <Text>{item.dressing_name}</Text>
                               </View>
                             );
                           }}

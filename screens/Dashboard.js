@@ -503,7 +503,7 @@ const Dashboard = () => {
                     <ViewProducts
                       onPress={() =>
                         navigation.navigate('productDetail', {
-                          product: { item },
+                          product:  item.id ,
                         })
                       }
                       key={item.id}
@@ -569,7 +569,7 @@ const Dashboard = () => {
             ) : (
               <View style={styles.recentlyViewProducts}>
                 {tenDiscountItems?.map((item, index) => {
-                  console.log("ZZZAAA : ", item);
+                  
                   return (
                     <ViewProducts
                       onPress={() =>

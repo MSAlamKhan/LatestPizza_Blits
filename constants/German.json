@@ -170,5 +170,6 @@
   "phone": "Telefon",
   "password": "Passwort",
   "forgotPassword": "Passwort vergessen",
-  "alreadyHaveAnAccount": "Sie haben bereits ein Konto"
+  "alreadyHaveAnAccount": "Sie haben bereits ein Konto",
+  "variation" : "die Variation"
 }

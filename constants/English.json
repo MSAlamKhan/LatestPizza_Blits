@@ -161,5 +161,6 @@
   "password": "Password",
 
   "amountDebited": "Amount Debited",
-  "amountCredited": "Amount Credited"
+  "amountCredited": "Amount Credited",
+  "variation" : "Variation"
 }

@@ -120,7 +120,7 @@ export const AuthProvider = props => {
                 parseFloat(item.sum) +
                 item.price +
                 product.totalAddonPrice
-              ),
+              ).toFixed(2),
             };
           }
           return item;
@@ -135,7 +135,7 @@ export const AuthProvider = props => {
               parseFloat(cart.totalAmount) +
               product.price +
               product.totalAddonPrice
-            ),
+            ).toFixed(2),
             addonsPrice: cart.addonsPrice + product.totalAddonPrice,
           });
           AsyncStorage.setItem('cart', cartDetails);
@@ -147,10 +147,10 @@ export const AuthProvider = props => {
               parseFloat(cart.totalAmount) +
               product.price +
               product.totalAddonPrice
-            ),
+            ).toFixed(2),
             addonsPrice: (
               parseFloat(cart.addonsPrice) + product.totalAddonPrice
-            ),
+            ).toFixed(2),
           };
         });
       } else {
@@ -158,7 +158,7 @@ export const AuthProvider = props => {
           const newItems = prev.items.concat({
             ...product,
             // is_deal: 'no',
-            sum: (product.price + product.totalAddonPrice),
+            sum: (product.price + product.totalAddonPrice).toFixed(2),
             quantity: 1,
           });
           const cartDetails = JSON.stringify({
@@ -169,10 +169,10 @@ export const AuthProvider = props => {
               parseFloat(cart.totalAmount) +
               product.price +
               product.totalAddonPrice
-            ),
+            ).toFixed(2),
             addonsPrice: (
               parseFloat(cart.addonsPrice) + product.totalAddonPrice
-            ),
+            ).toFixed(2),
           });
           AsyncStorage.setItem('cart', cartDetails);
           return {
@@ -183,10 +183,10 @@ export const AuthProvider = props => {
               parseFloat(cart.totalAmount) +
               product.price +
               product.totalAddonPrice
-            ),
+            ).toFixed(2),
             addonsPrice: (
               parseFloat(cart.addonsPrice) + product.totalAddonPrice
-            ),
+            ).toFixed(2),
           };
         });
       }
@@ -202,7 +202,7 @@ export const AuthProvider = props => {
       const productAlreadyPresent = cart.items.includes(productToRemove);
 
       if (productAlreadyPresent) {
-      
+        ///fix updatedItems
 
         if (product.quantity > 1) {
           const reduceQuantity = cart.items.map(item => {
@@ -218,7 +218,7 @@ export const AuthProvider = props => {
                   parseFloat(item.sum) -
                   item.price -
                   product.totalAddonPrice
-                ),
+                ).toFixed(2),
               };
             }
             return item;
@@ -231,10 +231,10 @@ export const AuthProvider = props => {
                 parseFloat(cart.totalAmount) -
                 product.price -
                 product.totalAddonPrice
-              ),
+              ).toFixed(2),
               addonsPrice: (
                 parseFloat(cart.addonsPrice) - product.totalAddonPrice
-              ),
+              ).toFixed(2),
             });
             AsyncStorage.setItem('cart', cartDetails);
             return {
@@ -244,10 +244,10 @@ export const AuthProvider = props => {
                 parseFloat(cart.totalAmount) -
                 product.price -
                 product.totalAddonPrice
-              ),
+              ).toFixed(2),
               addonsPrice: (
                 parseFloat(cart.addonsPrice) - product.totalAddonPrice
-              ),
+              ).toFixed(2),
             };
           });
         } else {
@@ -264,10 +264,10 @@ export const AuthProvider = props => {
                 parseFloat(prev.totalAmount) -
                 product.price -
                 product.addonsPrice
-              ),
+              ).toFixed(2),
               addonsPrice: (
                 parseFloat(cart.addonsPrice) - product.totalAddonPrice
-              ),
+              ).toFixed(2),
             });
             AsyncStorage.setItem('cart', cartDetails);
 
@@ -278,10 +278,10 @@ export const AuthProvider = props => {
                 parseFloat(prev.totalAmount) -
                 product.price -
                 product.totalAddonPrice
-              ),
+              ).toFixed(2),
               addonsPrice: (
                 parseFloat(cart.addonsPrice) - product.totalAddonPrice
-              ),
+              ).toFixed(2),
             };
           });
         }
@@ -313,7 +313,7 @@ export const AuthProvider = props => {
                 parseFloat(prev.totalAmount) -
                 parseFloat(productToRemove.sum) -
                 product.totalAddonPrice
-              ),
+              ).toFixed(2),
             });
             AsyncStorage.setItem('cart', cartDetails);
 
@@ -324,7 +324,7 @@ export const AuthProvider = props => {
                 parseFloat(prev.totalAmount) -
                 parseFloat(productToRemove.sum) -
                 product.totalAddonPrice
-              ),
+              ).toFixed(2),
             };
           });
         }

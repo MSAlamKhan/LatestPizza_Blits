@@ -34,7 +34,8 @@ const SearchComp = props => {
     <TouchableOpacity
       onPress={() =>
         navigation.navigate('productDetail', {
-          product: {item: productData},
+          // product: {item: productData},
+          product:  productData.id,
         })
       }
       key={productData.id}
