@@ -22,22 +22,18 @@
   "selectLanguage": "Select Language",
   "logout": "Logout",
   "signInToAcessProfile": "Sign in to Access Profile and get access for Purchashing in our amazing store",
-
   "fullName": "Full Name",
   "mobileNumber": "Mobile Number",
   "emailAddress": "Email Address",
   "payWithStripe": "Pay With Stripe",
   "payWithPaypal": "Pay With Paypal",
   "submit": "Submit",
-
   "pending": "PENDING",
   "pastOrder": "PAST ORDERS",
-
   "enterYourWalletAmmount": "Enter Your Wallet Amount",
   "mrMart": "Pizza Blitz",
   "addAmount": "Add Amount",
   "amount": "Amount",
-
   "share": "Share",
   "shareLinkWithFriend": "Share link with friends and family",
   "firstOrder": "FirstOrder",
@@ -48,7 +44,6 @@
   "faqAndTerm": "FAQ and Term & Conditions",
   "shareReferalID": "Share Referal Id",
   "howToActivateMyLoyaltyCard": "How to activate my LoyaltyCard?",
-
   "accounts": "ACCOUNTS",
   "myWishlist": "MY WISHLIST",
   "transactions": "Transactions",
@@ -56,58 +51,43 @@
   "termsOfUse": "Terms of Use",
   "privacyPolicy": "Privacy Policy",
   "returnPolicy": "Return Policy",
-
   "yourCart": "Your Cart",
   "totalAmount": "Total Amount",
   "purchaseItem": "PurchaseItem",
   "cartIsEmpty": "Cart Is Empty",
   "loginToAccessThisFeature": "Login To Access This Feature",
-
   "signin": "Sign In",
   "signinForBestExperince": "Signin for best experience",
   "enterYourEmailToContinue": "Enter your email to continue",
-
   "byContinuingYouAgree": "By Continuing,you Agree to Pizza Blitz",
-
   "doesntHaveAnAcount": " Does't have an account?",
-
   "enterYourPhoneToContinue": "Enter your Phone to continue",
-
   "useEmail": "Use Email",
   "ByContinuingYouAgreeToMrMarts": " By Continuing, you Agree to Pizza Blitz",
   "and": "and",
   "doesntHaveanAccount": "Doesn't have an account?",
   "signup": "Signup",
-
   "card": "Card",
   "mrMartLoyaltyCard": "Pizza Blitz Loyalty Card",
   "cardHolderName": "Card Holder Name",
-
   "address": "Address",
   "ammount": "Amount",
   "shippingCost": "Shipping Cost",
   "subTotal": "Sub Total",
-
   "back": "Back",
   "pleaseEnterFourDigitsCode": "Please Enter Four Digits Code",
-
   "addNewAddress": "Add new address",
   "addPaymentMethod": "Add payment method",
   "selectAnyAddress": "Select any address",
-
   "paymentMethods": "Payment Methods",
   "chooseDesiredPaymentType": "Choose a desired payment type, We offer different Payment Methods.",
   "cashOnDelivery": "Cash on delivery",
   "placeOrder": "Place Order",
-
   "transactionId": "transaction_id",
   "transactionType": "transaction Type",
-
   "library": "Library",
-
   "camera": "Camera",
   "enterLoyaltyCard": "Enter Loyalty Card",
-
   "shippingAddress2": "Shipping Address 2",
   "shippingAddress": "Shipping Address 1",
   "shippingPostalCode": "Shipping postal code",
@@ -119,29 +99,24 @@
   "shippingStateIsRequired": "Shipping state is required",
   "shippingAreaIsRequired": "Shipping area is required",
   "shippingCityIsRequired": "Shipping city is required",
-
   "enterYourRequiredDetail": "Enter Your Required Detail",
   "home": "Home",
   "categories": "Categories",
   "profile": "Profile",
   "cart": "Cart",
-
   "addAddress": "Add Address",
-
   "subCategory": "Sub Category",
   "noItemViewed": "No Item Viewed",
+  "noDealsFound": "No Deals to show",
   "discountedItems": "Discounted Items",
   "OpsnoData": "Ops no order found",
   "addons": "Addons",
   "proceedToCheckOut": "Proceed To CheckOut",
-
   "minOrder": "Min Order",
   "proceedForPaymentMethod": "Proceed For PaymentMethod",
-
   "theMinimumCost": "The minimum cost for order is",
   "pleaseAddAnyFurther": " Please, add any further items if you want. Or you can continue with paying shipping for",
   "continueShopping": "Continue Shopping",
-
   "paymentMethod": "Payment Methods",
   "ChooseDesiredPaymentMethod": "Choose desired payment method. We offer payment method suitable for most every day need",
   "Place order": "place Order",
@@ -149,18 +124,15 @@
   "yourOrderHasPlaced": "Your order has placed successfully.",
   "youWillBeNotified": "you will be notified once order will dispatch.",
   "activateLoyaltyCard": "Treuekarte aktivieren",
-
   "totalAddonsPrice": "Total Addons Price",
   "dressing": "Dressing",
   "type": "Type",
   "deals": "Deals",
   "nodeals": "No Deals",
-
   "forgotPassword": "Forgot Password",
   "phone": "Phone",
   "password": "Password",
-
   "amountDebited": "Amount Debited",
   "amountCredited": "Amount Credited",
-  "variation" : "Variation"
+  "variation": "Variation"
 }

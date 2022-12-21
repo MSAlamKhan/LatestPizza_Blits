@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React, { useContext } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -18,7 +18,7 @@ import AccountSetting from '../screens/AccountSetting';
 import Cart from '../screens/Cart';
 // import ThankYou from '../screens/ThankYou';
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MyOrders from '../screens/MyOrders';
 
 import LoyaltyCard from '../screens/LoyaltyCard';
@@ -30,11 +30,11 @@ import ProductList from '../screens/ProductList';
 import ProductDetails from '../screens/ProductDetails';
 import Search from '../screens/Search';
 import RegisterForm from '../screens/RegisterForm';
-import {AuthContext} from '../context/Auth';
+import { AuthContext } from '../context/Auth';
 import PrivacyPolicy from '../screens/PrivacyPolicy';
 
-import {PaymentMethod} from '../screens/PaymentMethod';
-import {Address} from '../screens/Address';
+import { PaymentMethod } from '../screens/PaymentMethod';
+import { Address } from '../screens/Address';
 import TermsPrivacy from '../screens/TermsPrivacy';
 import OTPScreen from '../screens/OTPScreen';
 
@@ -48,6 +48,11 @@ import ForgotPassowrdEmail from '../screens/ForgotPassowrdEmail';
 import NewPassword from '../screens/NewPassword';
 import PayWithStripe from '../screens/PayWithStripe';
 import DealsDetails from '../screens/DealsDetails';
+import Paypal from '../screens/Paypal';
+import PayWithPaypal from '../screens/PayWithPaypal';
+
+
+
 const Tab = createBottomTabNavigator();
 const AuthStack = createNativeStackNavigator();
 const AccountStack = createNativeStackNavigator();
@@ -59,90 +64,95 @@ export const AccountStackNavigator = () => {
   return (
     <AccountStack.Navigator>
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="profile"
         component={Profile}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="language"
         component={LanguageSelection}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="search"
         component={Search}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="editProfile"
         component={EditProfile}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="transactions"
         component={Tracsactions}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="myorders"
         component={MyOrders}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="myOrderDetails"
         component={MyOrderDetails}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="wallet"
         component={Wallet}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="stripe"
         component={Stripe}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
+        name="paypal"
+        component={Paypal}
+      />
+      <AccountStack.Screen
+        options={{ headerShown: false }}
         name="loyaltyCard"
         component={LoyaltyCard}
       />
 
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="accountSetting"
         component={AccountSetting}
       />
 
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="terms"
         component={TermsPrivacy}
       />
 
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="addAddress"
         component={ManageAddress}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="productDetail"
         component={ProductDetails}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="help"
         component={Help}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="privacy"
         component={PrivacyPolicy}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="return"
         component={ReturnPolicy}
       />
@@ -153,42 +163,42 @@ export const AuthentificationStackNavigator = () => {
   return (
     <AccountStack.Navigator>
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="login"
         component={LoginEmail}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="help"
         component={Help}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="privacy"
         component={PrivacyPolicy}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="return"
         component={ReturnPolicy}
       />
       <AuthStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="otp"
         component={OTPScreen}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="registration"
         component={RegisterForm}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="ForgotPassowrdEmail"
         component={ForgotPassowrdEmail}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="NewPassword"
         component={NewPassword}
       />
@@ -196,7 +206,7 @@ export const AuthentificationStackNavigator = () => {
   );
 };
 export const NotSignInStackNavigator = () => {
-  const {role, cart, selectedLanguage} = useContext(AuthContext);
+  const { role, cart, selectedLanguage } = useContext(AuthContext);
   return (
     <AccountStack.Navigator>
       {/* {!selectedLanguage && (
@@ -208,12 +218,12 @@ export const NotSignInStackNavigator = () => {
       )} */}
 
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="userBottom"
         component={BottomTabNavigator}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="Signin"
         component={AuthentificationStackNavigator}
       />
@@ -224,7 +234,7 @@ export const RiderAccountStackNavigator = () => {
   return (
     <AccountStack.Navigator>
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="riderprofile"
         component={RiderProfile}
       />
@@ -239,17 +249,17 @@ export const RiderAccountStackNavigator = () => {
         component={Search}
       /> */}
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="editProfile"
         component={EditProfile}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="transactions"
         component={Tracsactions}
       />
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="riderorderlist"
         component={RiderOrdersList}
       />
@@ -259,7 +269,7 @@ export const RiderAccountStackNavigator = () => {
         component={MyOrderDetails}
       /> */}
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="wallet"
         component={Wallet}
       />
@@ -274,13 +284,13 @@ export const RiderAccountStackNavigator = () => {
         component={ReferEarn}
       /> */}
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="accountSetting"
         component={AccountSetting}
       />
 
       <AccountStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="productDetail"
         component={ProductDetails}
       />
@@ -291,28 +301,28 @@ export const CategoryStackNavigator = () => {
   return (
     <CategoryStack.Navigator initialRouteName="categories">
       <CategoryStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="categories"
         component={Categories}
       />
       <CategoryStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="subCategories"
         component={SubCategories}
       />
       <CategoryStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="productList"
         component={ProductList}
       />
       <CategoryStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="productDetail"
         component={ProductDetails}
       />
 
       <CategoryStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="search"
         component={Search}
       />
@@ -323,27 +333,27 @@ export const DashBoardStackNavigator = () => {
   return (
     <DashBoardStack.Navigator>
       <DashBoardStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="dashboard"
         component={Dashboard}
       />
       <DashBoardStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="productList"
         component={ProductList}
       />
       <DashBoardStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="productDetail"
         component={ProductDetails}
       />
       <DashBoardStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="search"
         component={Search}
       />
       <DashBoardStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="dealsDetail"
         component={DealsDetails}
       />
@@ -354,34 +364,39 @@ export const CartStackNavigator = () => {
   return (
     <CartStack.Navigator>
       <CartStack.Screen
-        options={{headerShown: false, tabBarStyle: {display: 'none'}}}
+        options={{ headerShown: false, tabBarStyle: { display: 'none' } }}
         name="cart"
         component={Cart}
       />
       <CartStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="subCategories"
         component={SubCategories}
       />
       <CartStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="Address"
         component={Address}
       />
       <CartStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="paymentMethod"
         component={PaymentMethod}
       />
       <CartStack.Screen
-        options={{headerShown: false, tabBarStyle: {display: 'none'}}}
+        options={{ headerShown: false, tabBarStyle: { display: 'none' } }}
         name="thankyou"
         component={ThankYou}
       />
       <CartStack.Screen
-        options={{headerShown: false, tabBarStyle: {display: 'none'}}}
+        options={{ headerShown: false, tabBarStyle: { display: 'none' } }}
         name="payWithStripe"
         component={PayWithStripe}
+      />
+      <CartStack.Screen
+        options={{ headerShown: false, tabBarStyle: { display: 'none' } }}
+        name="paywithpaypal"
+        component={PayWithPaypal}
       />
       {/* <CartStack.Screen
         options={{headerShown: false}}
@@ -393,7 +408,7 @@ export const CartStackNavigator = () => {
 };
 
 export const BottomTabNavigator = () => {
-  const {cart, language, dealCart} = useContext(AuthContext);
+  const { cart, language, dealCart } = useContext(AuthContext);
 
   const defaultTabNavOptions = {
     tabBarStyle: {
@@ -410,7 +425,7 @@ export const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="dashboard"
-      screenOptions={{...defaultTabNavOptions, unmountOnBlur: true}}>
+      screenOptions={{ ...defaultTabNavOptions, unmountOnBlur: true }}>
       <Tab.Screen
         name="dashboardStack"
         component={DashBoardStackNavigator}
@@ -418,7 +433,7 @@ export const BottomTabNavigator = () => {
           headerShown: false,
           tabBarLabel: language?.home,
           tabBarVisible: false,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
@@ -429,7 +444,7 @@ export const BottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: language?.categories,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="category" color={color} size={size} />
           ),
           // tabBarBadge: 8,
@@ -442,7 +457,7 @@ export const BottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: language?.profile,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}
@@ -453,7 +468,7 @@ export const BottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: language?.cart,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <AntDesign name="shoppingcart" color={color} size={size} />
           ),
           tabBarBadge: cart.items.length + dealCart.items.length,
@@ -464,7 +479,7 @@ export const BottomTabNavigator = () => {
   );
 };
 export const UserBottomTabNavigator = () => {
-  const {cart, language, dealCart} = useContext(AuthContext);
+  const { cart, language, dealCart } = useContext(AuthContext);
 
   const defaultTabNavOptions = {
     tabBarStyle: {
@@ -481,7 +496,7 @@ export const UserBottomTabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName="dashboard"
-      screenOptions={{...defaultTabNavOptions, unmountOnBlur: true}}>
+      screenOptions={{ ...defaultTabNavOptions, unmountOnBlur: true }}>
       <Tab.Screen
         name="dashboardStack"
         component={DashBoardStackNavigator}
@@ -489,7 +504,7 @@ export const UserBottomTabNavigator = () => {
           headerShown: false,
           tabBarLabel: language?.home,
           tabBarVisible: false,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
         }}
@@ -500,7 +515,7 @@ export const UserBottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: language?.categories,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="category" color={color} size={size} />
           ),
           // tabBarBadge: 8,
@@ -512,7 +527,7 @@ export const UserBottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: language?.notifications,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="bell" color={color} size={size} />
           ),
         }}
@@ -524,7 +539,7 @@ export const UserBottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: language?.profile,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}
@@ -535,7 +550,7 @@ export const UserBottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: language?.cart,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <AntDesign name="shoppingcart" color={color} size={size} />
           ),
           tabBarBadge: cart.items.length + dealCart.items.length,
@@ -545,7 +560,7 @@ export const UserBottomTabNavigator = () => {
   );
 };
 export const RiderBottomTabNavigator = () => {
-  const {role, cart, language} = useContext(AuthContext);
+  const { role, cart, language } = useContext(AuthContext);
 
   const defaultTabNavOptions = {
     tabBarStyle: {
@@ -601,7 +616,7 @@ export const RiderBottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: 'My Order',
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <FontAwesome5 name="shipping-fast" color={color} size={20} />
           ),
         }}
@@ -613,7 +628,7 @@ export const RiderBottomTabNavigator = () => {
         options={{
           headerShown: false,
           tabBarLabel: language?.profile,
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
         }}
@@ -634,7 +649,7 @@ export const RiderBottomTabNavigator = () => {
   );
 };
 export const AuthStackNavigator = () => {
-  const {selectedLanguage, role} = useContext(AuthContext);
+  const { selectedLanguage, role } = useContext(AuthContext);
 
   return (
     <AuthStack.Navigator>
@@ -666,38 +681,38 @@ export const AuthStackNavigator = () => {
         component={LanguageSelection}
       /> */}
       <AuthStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="login"
         component={LoginEmail}
       />
       <AuthStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="privacy"
         component={PrivacyPolicy}
       />
       <AuthStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="registration"
         component={RegisterForm}
       />
       <AuthStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="ForgotPassowrdEmail"
         component={ForgotPassowrdEmail}
       />
       <AuthStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="NewPassword"
         component={NewPassword}
       />
       <AuthStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="otp"
         component={OTPScreen}
       />
       \
       <AuthStack.Screen
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
         name="terms"
         component={TermsPrivacy}
       />

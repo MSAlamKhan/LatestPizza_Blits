@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import {
   View,
   Text,
@@ -13,20 +13,22 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Entypo from 'react-native-vector-icons/Entypo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PaymentModal from '../components/modals/paymentModal';
-import {APIURL} from '../constants/Url';
+import { APIURL } from '../constants/Url';
 import Loader from '../components/Animatedfullscreen/Loader';
-import {AuthContext} from '../context/Auth';
+import { AuthContext } from '../context/Auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Zocial from 'react-native-vector-icons/Zocial';
 // import {
 //   requestOneTimePayment,
 //   requestBillingAgreement,
 // } from 'react-native-paypal';
 import Toast from 'react-native-simple-toast';
+import paypalApi from '../apis/paypalApi';
 
-export const PaymentMethod = ({route}) => {
-  const {price, selectPaymentTypes} = route.params;
+
+export const PaymentMethod = ({ route }) => {
+  const { price, selectPaymentTypes } = route.params;
 
   const [SelectType, setSelectType] = useState('');
   const [additionNotes, setAdditionNote] = useState('');
@@ -267,8 +269,7 @@ export const PaymentMethod = ({route}) => {
 
       form.append(
         'transaction_message',
-        `${
-          parseFloat(price) + shippingcost
+        `${parseFloat(price) + shippingcost
         } has beed debited from your account `,
       );
 
@@ -298,19 +299,50 @@ export const PaymentMethod = ({route}) => {
   };
   const payWithPaypal = async () => {
     try {
-      const {nonce, payerId, email, firstName, lastName, phone} =
-        await requestOneTimePayment(paypalToken, {
-          amount: price + shippingcost, // required
-          // any PayPal supported currency (see here: https://developer.paypal.com/docs/integration/direct/rest/currency-codes/#paypal-account-payments)
-          currency: 'EUR',
-          // any PayPal supported locale (see here: https://braintree.github.io/braintree_ios/Classes/BTPayPalRequest.html#/c:objc(cs)BTPayPalRequest(py)localeCode)
-          localeCode: 'en_GB',
-          shippingAddressRequired: false,
-          userAction: 'Pay Now', // display 'Pay Now' on the PayPal review page
-          // one of 'authorize', 'sale', 'order'. defaults to 'authorize'. see details here: https://developer.paypal.com/docs/api/payments/v1/#payment-create-request-body
-          intent: 'authorize',
+      setLoading(true)
+      const token = await paypalApi.generateToken()
+      const res = await paypalApi.createOrder(
+        token,
+        "CAPTURE",
+        "Cart Checkout",
+        "Payment for your food item(s) through paypal",
+        "1",
+        "" + (parseFloat(price) + parseFloat(shippingcost)),
+        "EUR")
+      //  setAccessToken(token)
+      console.log("res++++++", res)
+      setLoading(false)
+      if (!!res?.links) {
+        const findUrl = res.links.find(data => data?.rel == "approve")
+        // setPaypalUrl(findUrl.href)
+
+        navigation.navigate('paywithpaypal', {
+          amount: parseFloat(price),
+          shippingcost,
+          locationData,
+          mergedData,
+          additionNotes,
+          accessToken: token,
+          url: findUrl.href
         });
-      GetPaymentStatus(nonce);
+
+      }
+
+
+
+      // const {nonce, payerId, email, firstName, lastName, phone} =
+      //   await requestOneTimePayment(paypalToken, {
+      //     amount: price + shippingcost, // required
+      //     // any PayPal supported currency (see here: https://developer.paypal.com/docs/integration/direct/rest/currency-codes/#paypal-account-payments)
+      //     currency: 'EUR',
+      //     // any PayPal supported locale (see here: https://braintree.github.io/braintree_ios/Classes/BTPayPalRequest.html#/c:objc(cs)BTPayPalRequest(py)localeCode)
+      //     localeCode: 'en_GB',
+      //     shippingAddressRequired: false,
+      //     userAction: 'Pay Now', // display 'Pay Now' on the PayPal review page
+      //     // one of 'authorize', 'sale', 'order'. defaults to 'authorize'. see details here: https://developer.paypal.com/docs/api/payments/v1/#payment-create-request-body
+      //     intent: 'authorize',
+      //   });
+      // GetPaymentStatus(nonce);
     } catch (e) {
       Toast.show(`${e}`, Toast.LONG);
     }
@@ -344,17 +376,17 @@ export const PaymentMethod = ({route}) => {
   return loading ? (
     <Loader />
   ) : (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <PaymentModal
         modalVisible={modalVisibleLoyal}
         onClose={() => setModalVisibleLoyal(false)}
         onPress={() => setModalVisibleLoyal(false)}
         backButton={() => setModalVisibleLoyal(false)}
         price={price}
-        // modalVisible={false}
+      // modalVisible={false}
       />
-      <ScrollView style={{marginBottom: 80}}>
-        <Text style={[styles.paymentmethod, {paddingHorizontal: 5}]}>
+      <ScrollView style={{ marginBottom: 80 }}>
+        <Text style={[styles.paymentmethod, { paddingHorizontal: 5 }]}>
           {language.paymentMethod}
         </Text>
         <Text style={[styles.paymentmethod, styles.extrapaymentmethod]}>
@@ -378,9 +410,9 @@ export const PaymentMethod = ({route}) => {
                 },
               ]}>
               <item.IconCategory
-                style={{paddingRight: 10}}
+                style={{ paddingRight: 10 }}
                 name={item.IconName}
-                size={item.size}  
+                size={item.size}
                 color={Colors.primary}
               />
               <Text style={styles.paymentpyby}>{item.name}</Text>

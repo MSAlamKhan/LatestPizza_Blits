@@ -828,7 +828,7 @@ const ProductDetails = ({ route, navigation }) => {
             return (
               <View
                 style={{
-                  height: 120
+                  height: 80
                 }}
               >
                 <TouchableOpacity
@@ -838,9 +838,9 @@ const ProductDetails = ({ route, navigation }) => {
                   }}
                   style={{
                     backgroundColor: item.product_id == updatedId ? 'red' : 'green',
-                    width: 200,
+                    width: 250,
                     marginLeft: 10,
-                    height: 50,
+                    height: 40,
                     borderRadius: 10,
                     marginBottom: 10,
                     justifyContent: 'center'
@@ -850,7 +850,7 @@ const ProductDetails = ({ route, navigation }) => {
                   <Text
                     style={{
                       color: '#ffffff',
-                      fontSize: 16,
+                      fontSize: 14,
                       alignSelf: 'center'
                     }}
                   >{item.sub_title}</Text>

@@ -44,10 +44,10 @@ const Dashboard = () => {
   const [subCategory, setSubCategory] = useState([]);
   const [categorySliderImages, setCatategorySliderImages] = useState([]);
   const [dealData, setDealData] = useState([]);
-  console.log(productItem , "logo" )
+  console.log(productItem, "logo")
   const DiscountProducts = async recent => {
     setLoading(true);
- 
+
     try {
       let base_url = `${APIURL}/API/productlist_by_discount.php`;
 
@@ -130,7 +130,7 @@ const Dashboard = () => {
       initialDiscountarayyIndex,
       lastDiscountarayyIndex,
     );
-   
+
 
     setTenDiscountItems([...tenDiscountItems, ...tenItems]);
   };
@@ -160,7 +160,7 @@ const Dashboard = () => {
       });
 
       const responseData = await response.json();
-            console.log(responseData.Data , "newApi" )
+      console.log(responseData.Data, "newApi")
       const Success = responseData?.success;
 
       if (Success === false) {
@@ -234,7 +234,7 @@ const Dashboard = () => {
 
       const responseData = await response.json();
       const Success = responseData?.success;
-     
+
       if (Success == false) {
         throw new Error(responseData.Message);
       } else {
@@ -349,15 +349,15 @@ const Dashboard = () => {
     getSubCategory();
   }, []);
   useFocusEffect(
-    
+
     useCallback(() => {
-      
+
       // recentlyViewApi();
       // DiscountProducts();
-      
-   
+
+
     }
-    , []),
+      , []),
   );
 
   return isLoading ? (
@@ -490,7 +490,7 @@ const Dashboard = () => {
               ImageComponentStyle={{ width: '95%', marginTop: 5 }}
               imageLoadingColor={Colors.primary}
             /> */}
-            
+
             <Text style={styles.recentlyViewProductsText}>
               {language.recentlyViewProduct}
             </Text>
@@ -503,7 +503,7 @@ const Dashboard = () => {
                     <ViewProducts
                       onPress={() =>
                         navigation.navigate('productDetail', {
-                          product:  item.id ,
+                          product: item.id,
                         })
                       }
                       key={item.id}
@@ -513,8 +513,8 @@ const Dashboard = () => {
                 })}
               </View>
             )}
-              {/* varient  */}
-              {/* <Text style={styles.recentlyViewProductsText}>
+            {/* varient  */}
+            {/* <Text style={styles.recentlyViewProductsText}>
               {language.deals}
             </Text> */}
             {/* {productItemVariation.length == 0 ? (
@@ -538,12 +538,12 @@ const Dashboard = () => {
             )} */}
 
 
-                {/* varient */}
+            {/* varient */}
             <Text style={styles.recentlyViewProductsText}>
               {language.deals}
             </Text>
             {dealData.length == 0 ? (
-              <Text style={styles.noItemText}>{language.noDeals}</Text>
+              <Text style={styles.noItemText}>{language.noDealsFound}</Text>
             ) : (
               <View style={styles.recentlyViewProducts}>
                 {dealData?.map((item, index) => {
@@ -569,12 +569,12 @@ const Dashboard = () => {
             ) : (
               <View style={styles.recentlyViewProducts}>
                 {tenDiscountItems?.map((item, index) => {
-                  
+
                   return (
                     <ViewProducts
                       onPress={() =>
                         navigation.navigate('productDetail', {
-                          product:item.id 
+                          product: item.id
                         })
                       }
                       key={index}

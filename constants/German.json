@@ -16,6 +16,7 @@
   "editProfile": "Profil bearbeiten",
   "myOrders": "Meine Bestellungen",
   "wallet": "Geldbörse",
+  "noDealsFound": "Keine Angebote zum Anzeigen",
   "loyaltyCard": "Kundenkarte",
   "referAndEarn": "Empfehlen & verdienen",
   "accountSetting": "Konto-Einstellung",
@@ -30,12 +31,10 @@
   "submit": "Einreichen",
   "pending": "STEHT AUS",
   "pastOrder": "VERGANGENE BESTELLUNGEN",
-
   "enterYourWalletAmount": "Geben Sie Ihren Wallet-Betrag ein",
   "mrMart": "Pizza-Blitz",
   "addAmount": "Betrag hinzufügen",
   "amount": "Menge",
-
   "share": "Teilen",
   "shareLinkWithFriend": "Teilen Sie den Link mit Freunden und Familie",
   "firstOrder": "Erste Bestellung",
@@ -46,7 +45,6 @@
   "faqAndTerm": "FAQ und Allgemeine Geschäftsbedingungen",
   "shareRefferalID": "Empfehlungs-ID teilen",
   "howToActivateMyLoyaltyCard": "Wie aktiviere ich meine LoyaltyCard?",
-
   "accounts": "KONTEN",
   "myWishlist": "MEINE WUNSCHLISTE",
   "transactions": "Transaktionen",
@@ -54,47 +52,37 @@
   "termsOfUse": "Nutzungsbedingungen",
   "privacyPolicy": "Datenschutz-Bestimmungen",
   "returnPolicy": "Rücknahmegarantie",
-
   "yourCart": "Ihr Einkaufswagen",
   "totalAmount": "Gesamtsumme",
   "purchaseItem": "Artikel kaufen",
   "cartIsEmpty": "Einkaufswagen ist leer",
   "loginToAccessThisFeature": "Melden Sie sich an, um auf diese Funktion zuzugreifen",
-
   "signin": "Einloggen",
   "signinForBestExperince": "Melden Sie sich für die beste Erfahrung an",
   "enterYourEmailToContinue": "Geben Sie Ihre E-Mail-Adresse ein, um fortzufahren",
-
   "useEmail": "Verwenden Sie E-Mailरें",
   "ByContinuingYouAgreeToMrMarts": "Indem Sie fortfahren, stimmen Sie Pizza Blitz zu",
   "and": "und",
   "doesn'tHaveanAccount": "Sie haben kein Konto?",
   "signup": "Anmelden",
-
   "card": "Karte",
   "mrMartLoyaltyCard": "Pizza Blitz Treuekarte",
   "cardHolderName": "Name des Karteninhabers",
-
   "address": "Adresse",
   "ammount": "Amount",
   "shippingCost": "Versandkosten",
   "subTotal": "Zwischensumme",
-
   "back": "Der Rücken",
   "pleaseEnterFourDigitsCode": "Bitte geben Sie den vierstelligen Code ein",
-
   "addNewAddress": "Neue Adresse hinzufügen",
   "addPaymentMethod": "Zahlungsmethode hinzufügen",
   "selectAnyAddress": "Zahlungsmethode hinzufügen",
-
   "paymentMethods": "Zahlungsarten",
   "chooseDesiredPaymentType": "Wählen Sie eine gewünschte Zahlungsart aus. Wir bieten verschiedene Zahlungsmethoden an.",
   "cashOnDelivery": "Barzahlung bei Lieferung",
   "placeOrder": "Bestellung aufgeben",
-
   "transactionId": "Transaktions-ID",
   "transactionType": "Art der Transaktion",
-
   "Library": "Bibliothek",
   "camera": "Kamera",
   "Enter Loyalty Card": "Treuekarte eingeben",
@@ -114,62 +102,47 @@
   "categories": "Kategorien",
   "profile": "Profil",
   "cart": "Wagen",
-
   "addAddress": "Adresse hinzufügen",
-
   "subCategory": "Unterkategorie",
   "noItemViewed": "Kein Artikel angesehen",
   "discountedItems": "Kein Artikel angesehen",
   "OpsnoData": "Ups keine Bestellung gefunden",
-
   "addons": "Addons",
   "proceedToCheckOut": "Zur Kasse",
-
   "minOrder": "Mindestbestellmenge",
   "proceedForPaymentMethod": "Fahren Sie mit der Zahlungsmethode fort",
-
   "theMinimumCost": "Die Mindestkosten für die Bestellung betragen",
   "pleaseAddAnyFurther": "Bitte fügen Sie weitere Artikel hinzu, wenn Sie möchten. Oder Sie können mit der Zahlung der Versandkosten fortfahren",
   "continueShopping": "Mit dem Einkaufen fortfahren",
-
   "paymentMethod": "Zahlungsarten",
   "ChooseDesiredPaymentMethod": "Wählen Sie die gewünschte Zahlungsmethode. Wir bieten eine Zahlungsmethode an, die für die meisten alltäglichen Bedürfnisse geeignet ist",
   "PlaceOrder": "Bestellung aufgeben",
-
   "thankYou": "Danke!",
   "yourOrderHasPlaced": "Ihre Bestellung wurde erfolgreich aufgegeben.",
   "youWillBeNotified": "Sie werden benachrichtigt, sobald die Bestellung versandt wird.",
-
   "activateLoyaltyCard": "Treuekarte aktivieren",
-
   "welcomeTo": "Willkommen zu PizzaBlitz",
-
   "continue": "fortsetzen",
   "signupForBest": "Melden Sie sich für die beste Erfahrung an",
   "enterYourDetails": "Geben Sie Ihre Daten ein, um fortzufahren",
   "emailAddressIsRequired": "E-Mail ist erforderlich",
   "enterValidemailAddress": "Geben Sie eine gültige E-Mail-Adresse ein",
-
   "passowrdIsRequired": "Passwort wird benötigt",
-
   "phoneIsRequired": "Telefon ist erforderlich",
-
   "loginIn": "Einloggen in",
   "name": "Name",
   "nameIsRequired": "Name ist erforderlich",
   "passwordTooShort": "Das Passwort ist zu kurz, die Mindestlänge beträgt 8",
   "passwordMaximumLength": "Die maximale Passwortlänge beträgt 16",
   "numberMustBe": "Die Zahl muss zwischen 7 und 10 liegen",
-
   "totalAddonsPrice": "Gesamtpreis der Addons",
   "dressing": "Dressing",
   "type": "Typ",
   "deals": "Angebote",
   "nodeals": "Keine Angebote",
-
   "phone": "Telefon",
   "password": "Passwort",
   "forgotPassword": "Passwort vergessen",
   "alreadyHaveAnAccount": "Sie haben bereits ein Konto",
-  "variation" : "die Variation"
+  "variation": "die Variation"
 }

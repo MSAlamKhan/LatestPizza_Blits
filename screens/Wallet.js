@@ -17,6 +17,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../context/Auth';
 import Loader from '../components/Animatedfullscreen/Loader';
 import AmmoutModal from '../components/modals/AmmoutModal';
+import paypalApi from '../apis/paypalApi';
 // import {
 //   requestOneTimePayment,
 //   requestBillingAgreement,
@@ -74,46 +75,84 @@ const Wallet = () => {
       getUserDetail();
     }, []),
   );
-  const tranction = async (transactionid, amount) => {
-    setLoading(true);
-    try {
-      let base_url = `${APIURL}/API/transaction.php`;
+  // const tranction = async (transactionid, amount) => {
+  //   setLoading(true);
+  //   try {
+  //     let base_url = `${APIURL}/API/transaction.php`;
 
-      let form = new FormData();
+  //     let form = new FormData();
 
-      form.append(
-        'token',
-        'as23rlkjadsnlkcj23qkjnfsDKJcnzdfb3353ads54vd3favaeveavgbqaerbVEWDSC',
-      );
+  //     form.append(
+  //       'token',
+  //       'as23rlkjadsnlkcj23qkjnfsDKJcnzdfb3353ads54vd3favaeveavgbqaerbVEWDSC',
+  //     );
 
-      form.append('user_id', userDetails.user_id);
-      form.append('amount', amount);
-      form.append('transaction_id', transactionid);
-      form.append('transaction_type', 'credit');
-      form.append('gateway', 'paypal');
-      form.append('transaction_message', `${amount} credit to your account `);
-      // eslint-disable-next-line no-undef
-      const response = await fetch(base_url, {
-        method: 'post',
-        body: form,
-      });
+  //     form.append('user_id', userDetails.user_id);
+  //     form.append('amount', amount);
+  //     form.append('transaction_id', transactionid);
+  //     form.append('transaction_type', 'credit');
+  //     form.append('gateway', 'paypal');
+  //     form.append('transaction_message', `${amount} credit to your account `);
+  //     // eslint-disable-next-line no-undef
+  //     const response = await fetch(base_url, {
+  //       method: 'post',
+  //       body: form,
+  //     });
 
-      const responseData = await response.json();
-      console.log('tranction', responseData);
-      if (responseData.status) {
-        getUserDetail();
-      } else {
-        alert('try again latter');
-      }
-    } catch (error) {
-      alert('error:', error);
-    }
-    setLoading(false);
-  };
+  //     const responseData = await response.json();
+  //     console.log('tranction', responseData);
+  //     if (responseData.status) {
+  //       getUserDetail();
+  //     } else {
+  //       alert('try again later');
+  //     }
+  //   } catch (error) {
+  //     alert('error:', error);
+  //   }
+  //   setLoading(false);
+  // };
   const stripe = data => {
     setModalVisible(false);
     navigation.navigate('stripe', { amount: data.amount });
   };
+
+  const paypal = async (data) => {
+    setModalVisible(false);
+    setLoading(true)
+    try {
+      const token = await paypalApi.generateToken()
+      const res = await paypalApi.createOrder(
+        token,
+        "CAPTURE",
+        "Wallet Recharge",
+        "Recharge your wallet through paypal",
+        "1",
+        "" + data.amount,
+        "EUR")
+      console.log("res++++++", res)
+      //  setAccessToken(token)
+      setLoading(false)
+      if (!!res?.links) {
+        const findUrl = res.links.find(data => data?.rel == "approve")
+        // setPaypalUrl(findUrl.href)
+
+        navigation.navigate('paypal', {
+          amount: data.amount,
+          accessToken: token,
+          url: findUrl.href
+        });
+
+      }
+
+    } catch (error) {
+      console.log("error", error)
+      setLoading(false)
+
+    }
+
+    //navigation.navigate('paypal', { amount: data.amount });
+  };
+
   // const payWithPaypal = async data => {
   //   setModalVisible(false);
   //   const {nonce, payerId, email, firstName, lastName, phone} =
@@ -141,7 +180,7 @@ const Wallet = () => {
         onBackButtonPress={() => setModalVisible(false)}
         onBackdropPress={() => setModalVisible(false)}
         onPressStripe={data => stripe(data)}
-        onPressPaypal={data => payWithPaypal(data)}
+        onPressPaypal={data => paypal(data)}
       />
       {/* <Modal
         isVisible={modalVisible}
