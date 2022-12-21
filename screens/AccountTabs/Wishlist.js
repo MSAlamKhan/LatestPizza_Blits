@@ -6,21 +6,21 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Colors from '../../constants/Colors';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {APIURL} from '../../constants/Url';
+import { APIURL } from '../../constants/Url';
 import {
   useFocusEffect,
   useIsFocused,
   useNavigation,
 } from '@react-navigation/native';
-import {useCallback} from 'react';
+import { useCallback } from 'react';
 import Loader from '../../components/Animatedfullscreen/Loader';
 
 import NoData from '../../components/Animatedfullscreen/NoData';
-import {AuthContext} from '../../context/Auth';
+import { AuthContext } from '../../context/Auth';
 const ProductContainer = props => {
   const navigation = useNavigation();
 
@@ -34,26 +34,26 @@ const ProductContainer = props => {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate('productDetail', {
-                product: {item},
+                product: item.id,
               })
             }
             key={item.id}
             style={styles.productContainer}>
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <View>
 
-              <Image
-                style={styles.image}
-                source={{uri: `${APIURL}/admin_panel/Uploads/${item.image}`}}
+                <Image
+                  style={styles.image}
+                  source={{ uri: `${APIURL}/admin_panel/Uploads/${item.image}` }}
                 />
-              <View style={styles.discountContainer}>
-          <Text style={styles.discontText}>- {item?.discount}%</Text>
-        </View>
+                <View style={styles.discountContainer}>
+                  <Text style={styles.discontText}>- {item?.discount}%</Text>
                 </View>
+              </View>
               <View
-                style={{paddingLeft: 10, alignSelf: 'center', width: '63%'}}>
+                style={{ paddingLeft: 10, alignSelf: 'center', width: '63%' }}>
                 <Text style={styles.itemTitle}>{item.name}</Text>
-                <View style={{flexDirection: 'row'}}>
+                <View style={{ flexDirection: 'row' }}>
                   <Text style={styles.itemPrice}>€{item.price} </Text>
                   <Text style={styles.itemOff}>
                     <Text
@@ -64,13 +64,17 @@ const ProductContainer = props => {
                       }}>
                       {item.actualPrice}{' '}
                     </Text>
-                    
+
                   </Text>
                   <Text></Text>
                 </View>
               </View>
             </View>
-            <View>
+            <View
+              style={{
+                alignItems: 'center'
+              }}
+            >
               <Entypo name="chevron-small-right" size={35} />
               <Text style={styles.qtyText}>Qty:{item.qty}</Text>
             </View>
@@ -83,7 +87,7 @@ const ProductContainer = props => {
 const Wishlist = () => {
   const [isLoading, setLoading] = useState(true);
   const [wishListItem, setWishListItem] = useState([]);
-  const {wishlist} = useContext(AuthContext);
+  const { wishlist } = useContext(AuthContext);
 
   const isFocused = useIsFocused();
 
@@ -140,7 +144,7 @@ const Wishlist = () => {
           id: parseInt(item.id),
           quantity: 0,
           sum: 0,
-          discount: parseInt(item.discount) ,
+          discount: parseInt(item.discount),
           qty: item.qty,
           image: item.image,
           sub_category_id: item.sub_category_id,
@@ -209,16 +213,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingLeft: 10,
+    paddingRight: 40,
     borderRadius: 10,
   },
   image: {
     height: 70,
     width: 80,
   },
-  itemTitle: {fontFamily: 'Roboto-Bold'},
-  itemPrice: {color: 'green', fontFamily: 'Roboto-Regular'},
-  itemOff: {color: 'green', fontFamily: 'Roboto-Regular'},
+  itemTitle: { fontFamily: 'Roboto-Bold' },
+  itemPrice: { color: 'green', fontFamily: 'Roboto-Regular' },
+  itemOff: { color: 'green', fontFamily: 'Roboto-Regular' },
   qtyText: {
     fontFamily: 'Roboto-Regular',
   },

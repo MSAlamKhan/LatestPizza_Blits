@@ -42,7 +42,7 @@ const ProductDetails = ({ route, navigation }) => {
     setCart,
   } = useContext(AuthContext);
   const { product } = route.params;
-  const [updatedId , setUpdatedId] = useState(product);
+  const [updatedId, setUpdatedId] = useState(product);
   const [productData, setProductData] = useState();
   const [imageLoading, setImageLoading] = useState(true);
   const [modalVisible, setModalVisible] = useState(false);
@@ -53,7 +53,7 @@ const ProductDetails = ({ route, navigation }) => {
   const [addons, setaddons] = useState();
   const [selectedDressing, setSelectedDressing] = useState([]);
   const [selectedType, setSelectedType] = useState({});
-  const [variations , setVariations] = useState();
+  const [variations, setVariations] = useState([]);
   const getProductDetails = async () => {
 
     try {
@@ -65,21 +65,21 @@ const ProductDetails = ({ route, navigation }) => {
         'token',
         'as23rlkjadsnlkcj23qkjnfsDKJcnzdfb3353ads54vd3favaeveavgbqaerbVEWDSC',
       );
-      form.append('product_id',updatedId);
+      form.append('product_id', updatedId);
       const response = await fetch(base_url, {
         method: 'post',
         body: form,
       });
 
       const responseData = await response.json();
-            
+
       const Success = responseData?.Status;
-      if(Success == false){
-       
+      if (Success == false) {
+
         // recentlyViewItem();
-      }else{
+      } else {
         const productDetails = responseData.Data;
-        
+
         const discountItems = {
           name: productDetails.name,
           description: productDetails.description,
@@ -108,7 +108,7 @@ const ProductDetails = ({ route, navigation }) => {
           // dressing: item.dressing,
           // type: item.types,
         };
-        console.log("Zee : ",discountItems )
+        console.log("Zee : ", discountItems)
         setProductData(discountItems)
         setaddons({
           items: [discountItems?.addons[0]?.ao_data],
@@ -116,16 +116,16 @@ const ProductDetails = ({ route, navigation }) => {
         })
       }
 
-  
+
     } catch (error) {
       // Alert.alert(error.message);
       // console.log('recent error===>', error);
     }
-   
+
   };
 
   console.log('userDetails.user_id', userDetails.user_id);
- 
+
   const recentlyViewItem = async () => {
     const index = recentlyView.findIndex(item => item === updatedId);
 
@@ -191,7 +191,7 @@ const ProductDetails = ({ route, navigation }) => {
     }
   };
 
-  const getVariations = async()=>{
+  const getVariations = async () => {
     try {
       let base_url = `${APIURL}/API/get_variations_zee.php`;
 
@@ -201,19 +201,19 @@ const ProductDetails = ({ route, navigation }) => {
         'token',
         'as23rlkjadsnlkcj23qkjnfsDKJcnzdfb3353ads54vd3favaeveavgbqaerbVEWDSC',
       );
-      form.append('product_id',updatedId);
+      form.append('product_id', updatedId);
       const response = await fetch(base_url, {
         method: 'post',
         body: form,
       });
 
       const responseData = await response.json();
-        if(responseData.status == true){
-          console.log("Variation Data : ", responseData.data)
-          setVariations(responseData.data);
-        }    
-      
-  
+      if (responseData.status == true) {
+        console.log("Variation Data : ", responseData.data)
+        setVariations(responseData.data);
+      }
+
+
     } catch (error) {
       // Alert.alert(error.message);
       // console.log('recent error===>', error);
@@ -240,7 +240,7 @@ const ProductDetails = ({ route, navigation }) => {
       if (productData.quantity < productData.qty);
       Toast.show(` ${productItem[0].name} added to Cart`, Toast.SHORT);
       // console.log('selected type', selectedType);
-       console.log('productItem', productItem[0]);
+      console.log('productItem', productItem[0]);
       // console.log(cart);
       AddCart(productItem[0]);
       setModalVisible(false);
@@ -356,24 +356,24 @@ const ProductDetails = ({ route, navigation }) => {
     }
   };
 
-  useFocusEffect(useCallback(()=>{
+  useFocusEffect(useCallback(() => {
     setProductData();
-    
+
 
 
     getProductDetails()
     getVariations()
     recentlyViewItem();
-  },[updatedId]))
+  }, [updatedId]))
 
-// useEffect(()=>{
-//     getProductDetails()
-//     getVariations()
-// },[updatedId])
+  // useEffect(()=>{
+  //     getProductDetails()
+  //     getVariations()
+  // },[updatedId])
 
-  return(
+  return (
     <View style={styles.container}>
-<Modal
+      <Modal
         animationType="slide"
         transparent={true}
         visible={modalVisible}
@@ -726,7 +726,7 @@ const ProductDetails = ({ route, navigation }) => {
           </View>
         </View>
       </Modal>
-<View style={[styles.header]}>
+      <View style={[styles.header]}>
         <Image
           // resizeMode="cover"
           onLoad={() => {
@@ -763,7 +763,7 @@ const ProductDetails = ({ route, navigation }) => {
         </View>}
 
       </View>
-<View style={styles.lowerlayout}>
+      <View style={styles.lowerlayout}>
         <View style={styles.nameConatiner}>
           <Text style={styles.productName}>{productData?.name}</Text>
         </View>
@@ -795,58 +795,72 @@ const ProductDetails = ({ route, navigation }) => {
             </Text>}
           </Text>
         </View>
-     {/* zee */}
-     <Text
-     style={{
-      marginLeft:10,
-      marginBottom:5,
-      fontSize:18
-     }}
-     >
-      {language.variation}
-     </Text>
-         <FlatList
+
+        {
+          variations.length != 0 ?
+            <Text
+              style={{
+                marginLeft: 10,
+                marginBottom: 5,
+                fontSize: 18
+              }}
+            >
+              {language.variation}
+            </Text> :
+            null
+        }
+        {/* zee */}
+        {/* <Text
+          style={{
+            marginLeft: 10,
+            marginBottom: 5,
+            fontSize: 18
+          }}
+        >
+          {language.variation}
+        </Text> */}
+        <FlatList
           data={variations}
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.product_id}
-          renderItem={({item})=>{
-            return(
+          renderItem={({ item }) => {
+            return (
               <View
-              style={{
-                height:120
-              }}
+                style={{
+                  height: 120
+                }}
               >
-              <TouchableOpacity
-              onPress={()=>{
-                setUpdatedId(item.product_id);
-                
-              }}
-              style={{
-                backgroundColor: item.product_id == updatedId ? 'red' : 'green',
-                width:200,
-                marginLeft : 10,
-                height : 50,
-                borderRadius:10,
-                marginBottom:10,
-                justifyContent:'center'
-              }}
-              >
-        
-          <Text
-          style={{
-            color : '#ffffff',
-            fontSize : 16,
-            alignSelf:'center'
-          }}
-          >{item.sub_title}</Text>
-    
-          </TouchableOpacity>
-            </View>
+                <TouchableOpacity
+                  onPress={() => {
+                    setUpdatedId(item.product_id);
+
+                  }}
+                  style={{
+                    backgroundColor: item.product_id == updatedId ? 'red' : 'green',
+                    width: 200,
+                    marginLeft: 10,
+                    height: 50,
+                    borderRadius: 10,
+                    marginBottom: 10,
+                    justifyContent: 'center'
+                  }}
+                >
+
+                  <Text
+                    style={{
+                      color: '#ffffff',
+                      fontSize: 16,
+                      alignSelf: 'center'
+                    }}
+                  >{item.sub_title}</Text>
+
+                </TouchableOpacity>
+              </View>
             )
           }}
-         />
-        
+        />
+
         <ScrollView style={{ height: '70%', marginBottom: 10 }}>
           <Text style={styles.productDescription}>
             {productData?.description}

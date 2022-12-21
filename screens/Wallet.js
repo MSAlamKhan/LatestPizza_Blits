@@ -1,5 +1,5 @@
-import React, {useState, useCallback, useContext} from 'react';
-import {View, StyleSheet, Text, ImageBackground} from 'react-native';
+import React, { useState, useCallback, useContext } from 'react';
+import { View, StyleSheet, Text, ImageBackground } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../constants/Colors';
@@ -9,12 +9,12 @@ import LottieView from 'lottie-react-native';
 import CommonButton from '../components/CommonButton';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Input from '../components/Input';
-import {useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
-import {APIURL} from '../constants/Url';
+import { APIURL } from '../constants/Url';
 import Toast from 'react-native-simple-toast';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import {AuthContext} from '../context/Auth';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import { AuthContext } from '../context/Auth';
 import Loader from '../components/Animatedfullscreen/Loader';
 import AmmoutModal from '../components/modals/AmmoutModal';
 // import {
@@ -22,7 +22,7 @@ import AmmoutModal from '../components/modals/AmmoutModal';
 //   requestBillingAgreement,
 // } from 'react-native-paypal';
 const Wallet = () => {
-  const {userDetails, language, paypalToken} = useContext(AuthContext);
+  const { userDetails, language, paypalToken } = useContext(AuthContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [amount, setAmount] = useState();
   const [loading, setLoading] = useState(false);
@@ -34,8 +34,8 @@ const Wallet = () => {
     register,
     handleSubmit,
     reset,
-    formState: {errors, isValid},
-  } = useForm({mode: 'all'});
+    formState: { errors, isValid },
+  } = useForm({ mode: 'all' });
 
   const getUserDetail = async () => {
     setLoading(true);
@@ -61,7 +61,7 @@ const Wallet = () => {
         setAmount(responseData.Data.amount);
         setName(responseData.Data.name);
       } else {
-        alert('adserror');
+        alert('Your account was not found, Please try later.');
       }
     } catch (error) {
       Toast.show(error.message, Toast.LONG);
@@ -112,7 +112,7 @@ const Wallet = () => {
   };
   const stripe = data => {
     setModalVisible(false);
-    navigation.navigate('stripe', {amount: data.amount});
+    navigation.navigate('stripe', { amount: data.amount });
   };
   // const payWithPaypal = async data => {
   //   setModalVisible(false);
@@ -193,8 +193,8 @@ const Wallet = () => {
         {/* <View style={styles.walletContainer}> */}
         <LinearGradient
           colors={[Colors.buttongrad1, Colors.buttongrad2]}
-          start={{x: 0, y: 0}}
-          end={{x: 0, y: 1}}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
           style={styles.walletContainer}>
           {/* <ImageBackground
           source={{
@@ -219,13 +219,13 @@ const Wallet = () => {
         </LinearGradient>
         {/* </View> */}
         <View style={styles.mainBox}>
-          <View style={{marginVertical: 20}}>
+          <View style={{ marginVertical: 20 }}>
             <LottieView
-              style={{width: 200, height: 200, alignSelf: 'center'}}
+              style={{ width: 200, height: 200, alignSelf: 'center' }}
               source={require('../assets/LootiFile/Wallet.json')}
               autoPlay
               speed={1}
-              // resizeMode="cover"
+            // resizeMode="cover"
             />
           </View>
           {/* <StripeProvider
