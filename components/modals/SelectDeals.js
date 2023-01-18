@@ -184,7 +184,7 @@ const SelectDeals = props => {
       // animationInTiming={200}
       transparent={true}
       hideModalContentWhileAnimating={true}>
-      <View style={styles.modalInputsBox}>
+      <View style={[styles.modalInputsBox, {}]}>
         <TouchableOpacity
           onPressOut={() => clearData()}
           onPress={props.onClossPress}
@@ -502,6 +502,9 @@ const SelectDeals = props => {
               selectedAddons.addonstotalAmount,
               props.data.index,
             );
+            console.log('====================================');
+            console.log(selectedAddons, selectedType, selectedDressing, props.data.index);
+            console.log('====================================');
             clearData();
           }}
           style={{ marginTop: 10 }}

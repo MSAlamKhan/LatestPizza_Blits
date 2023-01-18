@@ -41,7 +41,6 @@ const ProductDetails = ({ route, navigation }) => {
   } = useContext(AuthContext);
   const { product } = route.params;
 
-  console.log(product)
 
   const productItem = product.item;
 
@@ -59,7 +58,7 @@ const ProductDetails = ({ route, navigation }) => {
       index: index,
       numberOfFreeitems: productitem.num_of_free_items,
     }));
-
+    console.log("ZZZXXXXCCCCCCCCC =====> ", index)
     const sameIndex = selectItemProduct.some(element => {
       if (element.index == index) {
         return true;
@@ -77,15 +76,47 @@ const ProductDetails = ({ route, navigation }) => {
       sortable.sort(function (a, b) {
         return a.index - b.index;
       });
+      if (selectWithIndex[0].addons.length == 0 &&
+        selectWithIndex[0].dressing.length == 0 &&
+        selectWithIndex[0].types.length == 0
+      ) {
+        setSelectItemProduct(sortable);
+        setItemsProducts(...selectWithIndex);
+        get(
+          { "addonstotalAmount": 0, "items": [], "selectedAddonsQuantity": 0 },
+          [],
+          [],
+          0,
+          index,
+        )
+      } else {
+        setSelectItemProduct(sortable);
+        setItemsProducts(...selectWithIndex);
+        setProductModal(true);
+      }
 
-      setProductModal(true);
-      setSelectItemProduct(sortable);
-
-      setItemsProducts(...selectWithIndex);
     } else {
-      setSelectItemProduct(prev => prev.concat(selectWithIndex));
-      setProductModal(true);
-      setItemsProducts(...selectWithIndex);
+
+      if (selectWithIndex[0].addons.length == 0 &&
+        selectWithIndex[0].dressing.length == 0 &&
+        selectWithIndex[0].types.length == 0
+      ) {
+        setSelectItemProduct(prev => prev.concat(selectWithIndex));
+        setItemsProducts(...selectWithIndex);
+        //{"addonstotalAmount": 0, "items": [], "selectedAddonsQuantity": 0} [] [] 2
+        get(
+          { "addonstotalAmount": 0, "items": [], "selectedAddonsQuantity": 0 },
+          [],
+          [],
+          0,
+          index,
+        )
+      } else {
+        setSelectItemProduct(prev => prev.concat(selectWithIndex));
+        setItemsProducts(...selectWithIndex);
+        setProductModal(true);
+      }
+
     }
   };
 
@@ -664,7 +695,7 @@ const ProductDetails = ({ route, navigation }) => {
                           key={(item, index) => index}
                           renderItem={({ item }) => {
                             {
-                              console.log("CCC : ",item)
+                              console.log("CCC : ", item)
                             }
                             return (
                               <View
