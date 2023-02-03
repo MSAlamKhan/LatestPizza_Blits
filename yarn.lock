@@ -1377,6 +1377,11 @@
   resolved "https://registry.yarnpkg.com/@react-native/normalize-color/-/normalize-color-2.0.0.tgz#da955909432474a9a0fe1cbffc66576a0447f567"
   integrity sha512-Wip/xsc5lw8vsBlmY2MO/gFLp3MvuZ2baBZjDeTjjndMgM0h5sxz7AZR62RDPGgstp8Np7JzjvVqVT7tpFZqsw==
 
+"@react-native/normalize-colors@*":
+  version "0.72.0"
+  resolved "https://registry.yarnpkg.com/@react-native/normalize-colors/-/normalize-colors-0.72.0.tgz#14294b7ed3c1d92176d2a00df48456e8d7d62212"
+  integrity sha512-285lfdqSXaqKuBbbtP9qL2tDrfxdOFtIMvkKadtleRQkdOxx+uzGvFr82KHmc/sSiMtfXGp7JnFYWVh4sFl7Yw==
+
 "@react-native/polyfills@2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@react-native/polyfills/-/polyfills-2.0.0.tgz#4c40b74655c83982c8cf47530ee7dc13d957b6aa"
@@ -2337,6 +2342,14 @@ capture-exit@^2.0.0:
   dependencies:
     rsvp "^4.8.4"
 
+card-validator@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/card-validator/-/card-validator-2.3.0.tgz#3db05dfd77809fb233d42b16c6bd254fece54296"
+  integrity sha512-V0RKmDiXhq5NogQ7w7WUW6JLsA1jz/A7edTtrNg6Lxf4PvMMznkmLf13zIM8fwcADTcsQ2xXQsfClnlqHZvYRw==
+  dependencies:
+    credit-card-type "^4.0.0"
+    lodash "3.10.1"
+
 card-validator@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/card-validator/-/card-validator-3.0.1.tgz#dcc2fabd6a1cd21f361b2536423a72de99a0894f"
@@ -2621,6 +2634,11 @@ cosmiconfig@^5.0.5, cosmiconfig@^5.1.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
+credit-card-type@^4.0.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/credit-card-type/-/credit-card-type-4.1.0.tgz#c6f4688fed64b2d85589d7c49e4bec405b0fa3b0"
+  integrity sha512-Bjg+zkDMAKpPTrOjJgfgWZvseQsGxpuVVKZaF+BCLO8d7vmCi/sARZGivPW5eMFAM+oEWR/xzlDIx5AFETFtlA==
+
 credit-card-type@^5.0.0:
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/credit-card-type/-/credit-card-type-5.0.4.tgz#2dd9df280411ce2bb91ed95ac31e814605717aed"
@@ -2794,6 +2812,15 @@ deprecated-react-native-prop-types@^2.2.0:
   integrity sha512-pWD0voFtNYxrVqvBMYf5gq3NA2GCpfodS1yNynTPc93AYA/KEMGeWDqqeUB6R2Z9ZofVhks2aeJXiuQqKNpesA==
   dependencies:
     "@react-native/normalize-color" "*"
+    invariant "*"
+    prop-types "*"
+
+deprecated-react-native-prop-types@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/deprecated-react-native-prop-types/-/deprecated-react-native-prop-types-4.0.0.tgz#544845e32f3220bc676f18c0b846d673399c45cb"
+  integrity sha512-q0kk77qFPC4adlnZH7cv9lfbHALeaTkl7wT1uNERc+e0Os3KcBKKy1rVliTE8sfey6TP6OPzoIXpr9OPidvvHw==
+  dependencies:
+    "@react-native/normalize-colors" "*"
     invariant "*"
     prop-types "*"
 
@@ -6160,7 +6187,7 @@ react-native-fast-image@^8.6.3:
   resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.6.3.tgz#6edc3f9190092a909d636d93eecbcc54a8822255"
   integrity sha512-Sdw4ESidXCXOmQ9EcYguNY2swyoWmx53kym2zRsvi+VeFCHEdkO+WG1DK+6W81juot40bbfLNhkc63QnWtesNg==
 
-react-native-flip-card@^3.4.1:
+react-native-flip-card@^3.3.0, react-native-flip-card@^3.4.1:
   version "3.5.6"
   resolved "https://registry.yarnpkg.com/react-native-flip-card/-/react-native-flip-card-3.5.6.tgz#de26f0285aa6f8ee10bb4b696c60c6fb43bb580f"
   integrity sha512-lqsjl4vF5DyHD7mjBJpyBoaLKVxalzoKfCosE63QF+TaCF9MKdJrxmGFQj/i64GDiMJqeS/5sNDcICUXtgFsVA==
@@ -6320,6 +6347,18 @@ react-native-vector-icons@^9.2.0:
   dependencies:
     prop-types "^15.7.2"
     yargs "^16.1.1"
+
+react-native-vertical-credit-card-input@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-vertical-credit-card-input/-/react-native-vertical-credit-card-input-0.0.0.tgz#26ae8f1de5c8ed610c301701a3ae14c496ac3735"
+  integrity sha512-th4YbdjBq5R81xInQB+HmOQlj3V3aQ7r25WPhkR4DAqiq94LMs9NSklmCCox1TwF0jekRDsUvoMhdGqIzmkeBg==
+  dependencies:
+    card-validator "^2.2.0"
+    lodash.compact "^3.0.1"
+    lodash.every "^4.6.0"
+    lodash.pick "^4.4.0"
+    lodash.values "^4.3.0"
+    react-native-flip-card "^3.3.0"
 
 react-native-webview@^11.25.0:
   version "11.25.1"

@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useContext , useEffect } from 'react';
-import {useForm} from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
+import React, { useContext, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import {
   View,
   Text,
@@ -13,25 +13,28 @@ import {
   Modal,
 } from 'react-native';
 
-import { CreditCardInput, LiteCreditCardInput } from "react-native-credit-card-input-plus";
 
 import LottieView from 'lottie-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CommonButton from '../components/CommonButton';
-import {APIURL} from '../constants/Url';
-import {AuthContext} from '../context/Auth';
+import { APIURL } from '../constants/Url';
+import { AuthContext } from '../context/Auth';
 import Input from '../components/Input';
 import Loader from '../components/Animatedfullscreen/Loader';
 import CashLoader from '../components/Animatedfullscreen/CashLoader';
 import Toast from 'react-native-simple-toast';
 import Colors from '../constants/Colors';
+
+import { CreditCardInput, LiteCreditCardInput } from "../components/react-native-vertical-credit-card-input"
+
+
 // create a component
 const CURRENCY = 'USD';
 var CARD_TOKEN = null;
 const STRIPE_PUBLISHABLE_KEY =
-'pk_test_51KsK97HmIepslB4LEJkmrrFr3zQw4CbcrKSxYQuktQVJlgfDyoaBsHok4tuHShl1EHEKc5nsoopEJ56b6iSRgMuD00PdiTFJJ6';
+  'pk_test_51KsK97HmIepslB4LEJkmrrFr3zQw4CbcrKSxYQuktQVJlgfDyoaBsHok4tuHShl1EHEKc5nsoopEJ56b6iSRgMuD00PdiTFJJ6';
 const Secret_key =
-'sk_test_51KsK97HmIepslB4LHRIVngVUWNgBgpLIYGdwTKf5B6ILmoxWjKELhEoQ7n758DAMHXQRgz1FnZrQ8iGXKjUYqSJd005yXMlK04';
+  'sk_test_51KsK97HmIepslB4LHRIVngVUWNgBgpLIYGdwTKf5B6ILmoxWjKELhEoQ7n758DAMHXQRgz1FnZrQ8iGXKjUYqSJd005yXMlK04';
 
 function getCreditCardToken(creditCardData) {
   // console.log('creditCardData ', creditCardData.values.number);
@@ -72,15 +75,15 @@ function subscribeUser(creditCardToken) {
   return new Promise(resolve => {
     CARD_TOKEN = creditCardToken.id;
     setTimeout(() => {
-      resolve({status: true});
+      resolve({ status: true });
     }, 1000);
   });
 }
 
-const Stripe = ({route}) => {
-  const {amount} = route.params;
+const Stripe = ({ route }) => {
+  const { amount } = route.params;
   const navigation = useNavigation();
-  const {userDetails} = useContext(AuthContext);
+  const { userDetails } = useContext(AuthContext);
   const [CardInput, setCardInput] = React.useState({});
   const [loading, setLoading] = React.useState(false);
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -88,7 +91,7 @@ const Stripe = ({route}) => {
   const [index, setIndex] = React.useState(9999);
 
   const tranction = async (user_id, amount) => {
-  console.log(userDetails.user_id)
+    console.log(userDetails.user_id)
     try {
       let base_url = `${APIURL}/API/transaction.php`;
       let form = new FormData();
@@ -122,14 +125,14 @@ const Stripe = ({route}) => {
     }
     setLoading(false);
   };
-  
+
   const {
     control,
     handleSubmit,
     watch,
-    formState: {errors},
+    formState: { errors },
     reset,
-  } = useForm({mode: 'all'});
+  } = useForm({ mode: 'all' });
 
   const onSubmit = async data => {
     // console.log(data.values , "shoe data")
@@ -147,15 +150,18 @@ const Stripe = ({route}) => {
       // console.log("creditCardToken", creditCardToken)
       if (creditCardToken.error) {
         alert('creditCardToken error');
+        setLoading(false);
         return;
       }
     } catch (e) {
       console.log('e', e);
+      setLoading(false);
       return;
     }
-    const {error} = await subscribeUser(creditCardToken);
+    const { error } = await subscribeUser(creditCardToken);
     if (error) {
       alert(error);
+      setLoading(false);
     } else {
       let pament_data = await charges();
 
@@ -165,7 +171,7 @@ const Stripe = ({route}) => {
         console.log('payment data,', pament_data);
         // Payment(pament_data.id);
         // tranction(pament_data.id);
-        tranction(userDetails.user_id , amount);
+        tranction(userDetails.user_id, amount);
         setLoading(false);
         navigation.navigate('wallet');
       } else {
@@ -178,6 +184,7 @@ const Stripe = ({route}) => {
         // }, 1000);
         alert('Payment failed');
         navigation.navigate('wallet');
+        setLoading(false);
       }
     }
     setLoading(true);
@@ -186,7 +193,7 @@ const Stripe = ({route}) => {
     // Send a request to your server with the received credit card token
     // Handle any errors from your server
   };
-  
+
 
   const charges = async () => {
     // const card = {
@@ -195,7 +202,7 @@ const Stripe = ({route}) => {
     //   source: CARD_TOKEN,
     //   description: 'PizzaBlitz',
     // };
-    
+
     const card = {
       amount: parseFloat(amount) * 100,
       currency: CURRENCY,
@@ -223,194 +230,61 @@ const Stripe = ({route}) => {
   };
 
   const _onChange = async data => {
-         console.log(data ,"ddjndjd")
-    let expDate = data.month + '/' + data.year;
     const values = {
       values: {
-        cvc: data.cvc,
-        expiry: expDate,
-        name: data.Acount,
-        number: data.cardNumber
-        // number: '4242 4242 4242 4242',
-      },
+
+        cvc: data.values.cvc,
+        expiry: data.values.expiry,
+        name: data.values.name,
+        number: data.values.number
+      }
+      //number: '4242 4242 4242 4242'
     }
-    
 
-      setCardInput(values);
-      onSubmit(values);
-    };
-    useEffect(() => {
+    setCardInput(values);
+    // onSubmit(values)
+  };
+  useEffect(() => {
 
-    }, [])
+  }, [])
 
   return loading ? (
     <CashLoader />
   ) : (
     <ScrollView style={styles.container}>
       <StatusBar barStyle="light-content" backgroundColor="#2471A3" />
-      <View style={{marginTop: 50}}>
-      <SafeAreaView style={{flex: 1, backgroundColor: Colors.background}}>
-        {/* <BackHeader title={'Buy Subscription'} /> */}
-        {/* <SquareIconButton back={true} style={styles.iconButton} /> */}
-        <View style={styles.inputContainer}>
-          {/* <Text style={styles.inputTitleText}>Card Number</Text> */}
-          <Input
-            onFocus={() => {
-              setIndex(0);
-            }}
-            InputContainerStyle={
-              index === 0
-                ? {borderWidth: 1, borderColor: "white"}
-                : {borderWidth: 0}
-            }
-            control={control}
-            name="cardNumber"
-            rules={{
-              required: 'Card number is required',
-              maxLength: {
-                value: 16,
-                message: '*Please enter valid card number',
-              },
-            }}
-            placeholder="Card Number"
-            keyboardType="number-pad"
-            placeholderTextColor={'#32323266'}
-          />
-        </View>
-        {/* {errors.cardNumber && <ValidationText text={errors.cardNumber.message} />} */}
-        {errors.cardNumber && (
-          <Text style={styles.error}>{errors.cardNumber.message} </Text>
-        )}
-  
-        <View
-          style={{
-            width: '50%',
-            marginTop: 10,
-            flexDirection: 'row',
-            paddingLeft: 20,
-          }}>
-          <Input
-            onFocus={() => {
-              setIndex(1);
-            }}
-            InputContainerStyle={
-              index === 1
-                ? {borderWidth: 1, borderColor: "white"}
-                : {borderWidth: 0}
-            }
-            control={control}
-            name="month"
-            rules={{
-              required: 'Month is required',
-              maxLength: {
-                value: 2,
-                message: '*Please enter valid month',
-              },
-            }}
-            placeholder="month Date"
-            keyboardType="number-pad"
-            placeholderTextColor={'#32323266'}
-          />
-  
-          <Input
-             style={{
-             
-              paddingLeft: 50,
-            }}
-            onFocus={() => {
-              setIndex(1);
-            }}
-            InputContainerStyle={
-              index === 1
-                ? {borderWidth: 1, borderColor: "white"}
-                : {borderWidth: 0}
-            }
-            control={control}
-            name="year"
-            rules={{
-              required: 'year is required',
-              maxLength: {
-                value: 2,
-                message: '*Please enter valid year',
-              },
-            }}
-            placeholder="Expiry Date"
-            keyboardType="number-pad"
-            placeholderTextColor={'#32323266'}
-          />
-        </View>
-        {/* {errors.expiry && <ValidationText text={errors.expiry.message} />} */}
-        {(errors.year || errors.month) && (
-          <Text style={styles.error}>Please enter valid date</Text>
-        )}
-  
-        <View style={styles.inputContainer}>
-          <Input
-            onFocus={() => {
-              setIndex(3);
-            }}
-            InputContainerStyle={
-              index === 3
-                ? {borderWidth: 1, borderColor: "white"}
-                : {borderWidth: 0}
-            }
-            control={control}
-            name="Acount"
-            rules={{
-              required: 'Account holder name is required',
-            }}
-            placeholder="Acount holder"
-            placeholderTextColor={'#32323266'}
-          />
-        </View>
-        {/* {errors.Acount && <ValidationText text={errors.Acount.message} />} */}
-        {errors.Acount && (
-          <Text style={styles.error}>{errors.Acount.message} </Text>
-        )}
-  
-        <View style={styles.inputContainer}>
-          <Input
-            onFocus={() => {
-              setIndex(4);
-            }}
-            InputContainerStyle={
-              index === 4
-                ? {borderWidth: 1, borderColor: "white"}
-                : {borderWidth: 0}
-            }
-            control={control}
-            name="cvc"
-            rules={{
-              required: 'CVC is required',
-              maxLength: {
-                value: 3,
-                message: '*Please enter valid CVC number',
-              },
-            }}
-            keyboardType="number-pad"
-            placeholder="CVC"
-            placeholderTextColor={'#32323266'}
-          />
-        </View>
-        {/* {errors.cvc && <ValidationText text={errors.cvc.message} />} */}
-        {errors.cvc && <Text style={styles.error}>{errors.cvc.message} </Text>}
-  
-        {/* <CustomButton
-          title={'Submit'}
-          // onPress={() => setIsSignin(true)}
-          onPress={handleSubmit(_onChange)}
-          containerStyle={styles.containerStyle}
-          style={styles.enabledButton}
-          textStyle={styles.enabledButtonText}
-        /> */}
-      
+      <View style={{ marginTop: 50 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: Colors.background }}>
 
-      <CommonButton
-        style={{marginTop: 30, marginHorizontal: 70}}
-        onPress={handleSubmit(_onChange)}
-        title={'Pay'}
-      />
-      </SafeAreaView>
+          <View
+            style={{
+              marginTop: 20,
+              marginHorizontal: 10
+            }}
+          >
+            <CreditCardInput
+              requiresName={true}
+              cardImageFront={require('../assets/card-front-green.png')}
+              cardImageBack={require('../assets/card-back-green.png')}
+              inputContainerStyle={styles.inputContainerStyle}
+              inputStyle={styles.inputStyle}
+              labelStyle={styles.labelStyle}
+              validColor="black"
+              placeholderColor="#ccc"
+              onChange={_onChange} />
+          </View>
+
+          <CommonButton
+            style={{ marginTop: 30, marginHorizontal: 70 }}
+            onPress={() => {
+              console.log("All data = == ==>", CardInput)
+              if (CardInput != null) {
+                onSubmit(CardInput)
+              }
+            }}
+            title={'Pay'}
+          />
+        </SafeAreaView>
       </View>
       {/* <CustomButton
         title="Pay Now"
@@ -467,15 +341,11 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
   inputContainerStyle: {},
+
   inputStyle: {
-    // paddingLeft: 15,
-    // color: 'black',
-    // color: colors.textlight2grey,
-    fontFamily: 'Montserrat-Bold',
+    placeholderTextColor: 'grey',
     letterSpacing: -0.34,
     paddingLeft: 15,
-    // marginVertical: 10,
-    backgroundColor: 'white',
     paddingHorizontal: 10,
     paddingVertical: 0,
     height: 50,
@@ -483,16 +353,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   labelStyle: {
-    // marginBottom: 5,
-    fontSize: 12,
-    // fontFamily: 'Montserrat-Regular',
-    // color: 'black',
-    // color: colors.textlight2grey,
-    // fontFamily: 'Montserrat-Medium',
+    fontSize: 14,
     letterSpacing: -0.34,
     paddingLeft: 15,
     paddingHorizontal: 2,
     paddingVertical: 10,
+    color: '#000000',
+    fontFamily: 'Poppins-Medium'
   },
   inputContainer: {
     width: '90%',
