@@ -23,7 +23,6 @@ import Zocial from 'react-native-vector-icons/Zocial';
 //   requestOneTimePayment,
 //   requestBillingAgreement,
 // } from 'react-native-paypal';
-import Toast from 'react-native-simple-toast';
 import paypalApi from '../apis/paypalApi';
 
 
@@ -173,7 +172,7 @@ export const PaymentMethod = ({ route }) => {
 
         // throw new Error(responseData.Message);
       } else {
-        Toast.show(responseData.Message, Toast.LONG);
+        alert(responseData.Message);
         // console.log('api response=>', responseData);
       }
     } catch (error) {
@@ -344,7 +343,7 @@ export const PaymentMethod = ({ route }) => {
       //   });
       // GetPaymentStatus(nonce);
     } catch (e) {
-      Toast.show(`${e}`, Toast.LONG);
+      alert(`${e}`);
     }
   };
 

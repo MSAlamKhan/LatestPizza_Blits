@@ -20,7 +20,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import CommonButton from '../../components/CommonButton';
 import OneSignal from 'react-native-onesignal';
 import Loader from '../../components/Animatedfullscreen/Loader';
-import Toast from 'react-native-simple-toast';
 import LottieView from 'lottie-react-native';
 const RiderOrdersList = () => {
   // const {isSignin, setIsSignin, setRole, role} = useContext(AuthContext);
@@ -128,7 +127,7 @@ console.log('resss===>',responseData);
         alert(responseData.Message);
         getPastOrders();
         getPendingOrders();
-        Toast.show(`order resached`, Toast.SHORT);
+        alert(`order resached`);
         // setModalVisible();
       }
     } catch (error) {

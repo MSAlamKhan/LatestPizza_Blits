@@ -16,7 +16,6 @@ import {APIURL} from '../constants/Url';
 import {color} from 'react-native-reanimated';
 import Loader from '../components/Animatedfullscreen/Loader';
 import LottieView from 'lottie-react-native';
-import Toast from 'react-native-simple-toast';
 import {AutoSizeText, ResizeTextMode} from 'react-native-auto-size-text';
 const MyOrders = () => {
   const {userDetails, language} = useContext(AuthContext);
@@ -163,7 +162,6 @@ console.log('reponse',responseData)
       }
     } catch (error) {
       console.log('error', error);
-      // Toast.show(error.message, Toast.LONG);
     } finally {
       setLoading(false);
     }
@@ -197,7 +195,7 @@ console.log('reponse',responseData)
         setPastOrders(responseData.Data);
       }
     } catch (error) {
-      Toast.show(error.message, Toast.LONG);
+    alert(error.message);
     }
     setLoading(false);
   }, []);

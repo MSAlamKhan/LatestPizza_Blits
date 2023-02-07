@@ -22,7 +22,6 @@ import { AuthContext } from '../context/Auth';
 import Input from '../components/Input';
 import Loader from '../components/Animatedfullscreen/Loader';
 import CashLoader from '../components/Animatedfullscreen/CashLoader';
-import Toast from 'react-native-simple-toast';
 import Colors from '../constants/Colors';
 
 import { CreditCardInput, LiteCreditCardInput } from "../components/react-native-vertical-credit-card-input"
@@ -116,7 +115,7 @@ const Stripe = ({ route }) => {
       console.log('responseeeee', responseData);
       if (responseData.status == true) {
         navigation.goBack();
-        Toast.show(` ${amount} has been credited to your account`, Toast.LONG);
+        alert(` ${amount} has been credited to your account`);
       } else {
         alert('addsaerror1111111132321');
       }

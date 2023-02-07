@@ -12,7 +12,6 @@ import Input from '../components/Input';
 import { useForm } from 'react-hook-form';
 
 import { APIURL } from '../constants/Url';
-import Toast from 'react-native-simple-toast';
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../context/Auth';
 import Loader from '../components/Animatedfullscreen/Loader';
@@ -65,7 +64,7 @@ const Wallet = () => {
         alert('Your account was not found, Please try later.');
       }
     } catch (error) {
-      Toast.show(error.message, Toast.LONG);
+      alert(error.message);
     }
     setLoading(false);
   };

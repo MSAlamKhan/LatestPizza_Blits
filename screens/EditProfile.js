@@ -22,7 +22,6 @@ import {accessCamera, accessGallery} from '../utils/Imagepicker';
 import {ImagePickerModal} from '../components/modals/ImagePickerModal';
 import {getPixelSizeForLayoutSize} from 'react-native/Libraries/Utilities/PixelRatio';
 import Loader from '../components/Animatedfullscreen/Loader';
-import Toast from 'react-native-simple-toast';
 
 //askdasmndklas
 const EditProfile = () => {
@@ -123,12 +122,12 @@ const EditProfile = () => {
       if (responseData.status === true) {
         await getUserDetail();
         // alert(responseData.message);
-        Toast.show(`${responseData.message}`, Toast.SHORT);
+        alert(`${responseData.message}`);
         userDetails.role_id == 2
           ? navigation.navigate('riderprofile')
           : navigation.navigate('profile');
       } else {
-        Toast.show(`${responseData.message}`, Toast.SHORT);
+        alert(`${responseData.message}`);
         setLoading(false);
       }
     } catch (error) {
@@ -153,9 +152,9 @@ const EditProfile = () => {
       if (granted === PermissionsAndroid.RESULTS.GRANTED) {
         console.log('You can use the camera');
       } else {
-        Toast.show(
-          'Camera Permission isnt Given go to setting to acccess camera permission',
-          Toast.SHORT,
+        alert(
+          'Camera Permission isnt Given go to setting to acccess camera permission'
+  
         );
         setTimeout(() => {
           //your code to be executed after 1 second

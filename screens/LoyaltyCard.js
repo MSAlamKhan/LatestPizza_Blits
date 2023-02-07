@@ -17,7 +17,6 @@ import {AuthContext} from '../context/Auth';
 import {NavigationContainer, useFocusEffect} from '@react-navigation/native';
 import Loader from '../components/Animatedfullscreen/Loader';
 // import {AuthContext} from '../context/Auth';
-import Toast from 'react-native-simple-toast';
 const LoyaltyCard = ({navigation}) => {
   const [toogle, setToogle] = useState(false);
   const [toogle1, setToogle1] = useState(false);
@@ -89,7 +88,7 @@ const LoyaltyCard = ({navigation}) => {
         setLoding(false);
 
         // console.log(responseData);
-        Toast.show(`Activation succesfull`, Toast.LONG);
+        alert(`Activation succesfull`);
         setcardDetails(responseData);
         navigation.navigate('profile');
       } else {

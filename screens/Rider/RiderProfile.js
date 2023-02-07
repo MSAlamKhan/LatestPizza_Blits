@@ -11,7 +11,6 @@ import {APIURL} from '../../constants/Url';
 import SelectLanugageModal from '../../components/modals/SelectLanguageModal';
 
 // import RNRestart from 'react-native-restart';
-import Toast from 'react-native-simple-toast';
 import {english, hindi} from '../../constants/Language';
 import Loader from '../../components/Animatedfullscreen/Loader';
 const RiderProfile = ({navigation}) => {
@@ -49,7 +48,7 @@ const RiderProfile = ({navigation}) => {
       const responseData = await response.json();
 
       if (responseData.status === false) {
-        Toast.show(responseData.Message, Toast.LONG);
+        alert(responseData.Message);
       } else {
         await AsyncStorage.removeItem('userDetails');
         // RNRestart.Restart();

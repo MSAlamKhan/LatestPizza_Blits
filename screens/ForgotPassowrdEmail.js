@@ -6,7 +6,6 @@ import Colors from '../constants/Colors';
 import {AuthContext} from '../context/Auth';
 
 import {APIURL} from '../constants/Url';
-import Toast from 'react-native-simple-toast';
 import Input from '../components/Input';
 import {useForm} from 'react-hook-form';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -59,11 +58,11 @@ export default function AddPhoneNumber({navigation, route}) {
           OTP: responseData.data.OTP,
           email: data.email,
         });
-        Toast.show(responseData.message, Toast.LONG);
+        alert(responseData.message);
 
         // setIsSignin(false);
       } else {
-        Toast.show(responseData.message, Toast.LONG);
+        alert(responseData.message, );
       }
 
       return responseData;

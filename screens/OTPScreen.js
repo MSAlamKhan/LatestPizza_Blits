@@ -13,7 +13,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {useForm} from 'react-hook-form';
-import Toast from 'react-native-simple-toast';
 import Colors from '../constants/Colors';
 import AuthButton from '../components/AuthButton';
 import Input from '../components/Input';
@@ -62,7 +61,7 @@ const OTPScreen = ({route, navigation}) => {
       // navigation.navigate('profile');
       setIsSignin(true);
     } else {
-      Toast.show('Otp doesnt match', Toast.LONG);
+      alert('Otp doesnt match');
     }
     setLoading(false);
   };
@@ -108,18 +107,18 @@ const OTPScreen = ({route, navigation}) => {
           await AsyncStorage.setItem('userDetails', userDetail);
           setUserDetails(responseData.Data);
           setIsSignin(true);
-          Toast.show(responseData.Message, Toast.LONG);
+          alert(responseData.Message);
           setIsSignin(true);
           // navigation.navigate('dashBoard');
         } else {
-          Toast.show(responseData.Message, Toast.LONG);
+          alert(responseData.Message);
         }
       } catch (error) {
         Alert.alert(error.message);
         setLoading(false);
       }
     } else {
-      Toast.show('Invalid OTP', Toast.LONG);
+      alert('Invalid OTP');
     }
     setLoading(false);
   };
@@ -148,7 +147,6 @@ const OTPScreen = ({route, navigation}) => {
   //     } else {
   //       setOTP(responseData.OTP);
   //     }
-  //     Toast.show(responseData.Message, Toast.LONG);
   //   } catch (error) {
   //     Alert.alert(error.message);
   //   } finally {

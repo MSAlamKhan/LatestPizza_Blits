@@ -16,7 +16,6 @@ import NoData from '../components/Animatedfullscreen/NoData';
 import { APIURL } from '../constants/Url';
 import { useFocusEffect } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
-import Toast from 'react-native-simple-toast';
 const ProductList = ({ route, navigation }) => {
   const { subCategoryId, categoryname } = route.params;
   console.log("subCategoryId ", subCategoryId)
@@ -79,7 +78,7 @@ const ProductList = ({ route, navigation }) => {
         setProductData(productItem);
       }
     } catch (error) {
-      Toast.show(`${error}`, Toast.LONG);
+      alert(`${error}`);
     }
     setLoading(false);
   }, []);

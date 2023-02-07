@@ -16,7 +16,6 @@ import Colors from '../constants/Colors';
 import CommonButton from '../components/CommonButton';
 import { APIURL } from '../constants/Url';
 import { AuthContext } from '../context/Auth';
-import Toast from 'react-native-simple-toast';
 import { useFocusEffect } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -231,13 +230,11 @@ const ProductDetails = ({ route, navigation }) => {
       );
 
       AddDealsCart(productToAdd, addonsPrice, productItem.price);
-      Toast.show(
-        `${productItem?.name} has been added to your cart`,
-        Toast.LONG,
-      );
+      alert(
+        `${productItem?.name} has been added to your cart`);
       navigation.goBack();
     } else {
-      Toast.show(`Please Select All the item present in the deal`, Toast.LONG);
+      alert(`Please Select All the item present in the deal`);
     }
   };
 
@@ -516,7 +513,7 @@ const ProductDetails = ({ route, navigation }) => {
             color={wishlist.includes(productItem?.id) ? 'red' : 'grey'}
             size={23}
             onPress={() => {
-              Toast.show(`wokring on ittt`, Toast.SHORT);
+              alert(`wokring on ittt`);
             }}
           />
 

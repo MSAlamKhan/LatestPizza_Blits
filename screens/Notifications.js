@@ -6,7 +6,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import {AuthContext} from '../context/Auth';
 import {APIURL} from '../constants/Url';
 import {useFocusEffect} from '@react-navigation/native';
-import Toast from 'react-native-simple-toast';
 import {ScrollView} from 'react-native-gesture-handler';
 const Notifications = () => {
   const [selectedType, setSelectedType] = useState('all');
@@ -50,10 +49,10 @@ const Notifications = () => {
         // setAmount(responseData.Data.amount);
         // setName(responseData.Data.name);
       } else {
-        Toast.show(`No Notification`, Toast.LONG);
+        alert(`No Notification`);
       }
     } catch (error) {
-      Toast.show(`Internet not working`, Toast.LONG);
+      alert(`Internet not working`);
     }
   };
   useFocusEffect(

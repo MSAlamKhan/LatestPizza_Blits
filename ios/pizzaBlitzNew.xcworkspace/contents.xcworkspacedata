@@ -2,12 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:PizzaBlitz.xcodeproj">
+      location = "group:pizzaBlitzNew.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:mrmart.xcodeproj">
    </FileRef>
 </Workspace>

@@ -8,7 +8,6 @@ import {useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../context/Auth';
 import Loader from '../Animatedfullscreen/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Toast from 'react-native-simple-toast';
 import {APIURL} from '../../constants/Url';
 const PaymentModal = props => {
   const Shipping_address_2 = useRef();
@@ -74,7 +73,7 @@ const PaymentModal = props => {
         onSubmit(data);
         // throw new Error(responseData.Message);
       } else {
-        Toast.show(`${responseData.Message}`, Toast.LONG);
+        alert(`${responseData.Message}`);
       }
     } catch (error) {
       // Alert.alert(error.message);
@@ -117,10 +116,10 @@ const PaymentModal = props => {
       const responseData = await response.json();
 
       if (responseData.status === true) {
-        Toast.show(`${responseData.Message}`, Toast.LONG);
+        alert(`${responseData.Message}`);
         removeItemValue();
       } else {
-        Toast.show(`${responseData.Message}`, Toast.LONG);
+        alert(`${responseData.Message}`);
       }
     } catch (error) {
       console.log(error);
@@ -155,12 +154,12 @@ const PaymentModal = props => {
         setLoading(false);
         // setmodal(false);
         PlaceOrder();
-        Toast.show(`${responseData.Message}`, Toast.LONG);
+        alert(`${responseData.Message}`);
         // setmodal(false);
 
         // throw new Error(responseData.Message);
       } else {
-        Toast.show(`${responseData.Message}`, Toast.LONG);
+        alert(`${responseData.Message}`);
         setLoading(false);
         // setmodal(false);
       }

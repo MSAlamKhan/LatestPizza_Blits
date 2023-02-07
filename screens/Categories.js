@@ -16,7 +16,6 @@ import Loader from '../components/Animatedfullscreen/Loader';
 import { APIURL } from '../constants/Url';
 import { useFocusEffect } from '@react-navigation/native';
 import { AuthContext } from '../context/Auth';
-import Toast from 'react-native-simple-toast';
 
 const Categories = ({ route, navigation }) => {
   const { language } = useContext(AuthContext);
@@ -50,7 +49,7 @@ const Categories = ({ route, navigation }) => {
       }
     } catch (error) {
       // Alert.alert(error.message);
-      Toast.show(error.message, Toast.LONG);
+      alert(error.message);
     } finally {
       setLoading(false);
     }

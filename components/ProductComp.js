@@ -5,14 +5,14 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  ToastAndroid,
+
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Colors from '../constants/Colors';
 import {useFocusEffect} from '@react-navigation/native';
 import {AuthContext} from '../context/Auth';
 import {APIURL} from '../constants/Url';
-import Toast from 'react-native-simple-toast';
+
 
 const ProductComp = props => {
   const {AddCart, RemoveCart, cart} = useContext(AuthContext);
@@ -29,7 +29,7 @@ const ProductComp = props => {
   );
   const AddProduct = () => {
     productData.quantity == productData.qty &&
-      Toast.show(`Quantity available is ${productData.qty}`, Toast.LONG);
+      alert(`Quantity available is ${productData.qty}`);
     productData.quantity < productData.qty && AddCart(productData);
   };
 

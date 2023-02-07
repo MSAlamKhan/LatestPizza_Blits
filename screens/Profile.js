@@ -20,7 +20,6 @@ import CommonButton from '../components/CommonButton';
 import {english, german, hindi} from '../constants/Language';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SelectLanugageModal from '../components/modals/SelectLanguageModal';
-import Toast from 'react-native-simple-toast';
 import {APIURL} from '../constants/Url';
 import Loader from '../components/Animatedfullscreen/Loader';
 
@@ -59,7 +58,7 @@ const Profile = ({navigation}) => {
       const responseData = await response.json();
 
       if (responseData.status === false) {
-        Toast.show(responseData.Message, Toast.LONG);
+        alert(responseData.Message);
       } else {
         await AsyncStorage.removeItem('userDetails');
         setRecentlyView([]);
@@ -74,7 +73,7 @@ const Profile = ({navigation}) => {
 
       return responseData;
     } catch (error) {
-      Toast.show(error.message, Toast.LONG);
+      alert(error.message);
     }
     setLoading(false);
     // await AsyncStorage.removeItem('userDetails');

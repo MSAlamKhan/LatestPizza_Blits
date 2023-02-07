@@ -5,7 +5,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  ToastAndroid,
+
   ActivityIndicator,
 } from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -13,7 +13,6 @@ import Colors from '../constants/Colors';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../context/Auth';
 import {APIURL} from '../constants/Url';
-import Toast from 'react-native-simple-toast';
 import {ScrollView} from 'react-native-gesture-handler';
 
 const SearchComp = props => {

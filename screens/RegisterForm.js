@@ -18,7 +18,6 @@ import Input from '../components/Input';
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {AuthContext} from '../context/Auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Toast from 'react-native-simple-toast';
 import {APIURL} from '../constants/Url';
 import RNPickerSelect from 'react-native-picker-select';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -78,7 +77,7 @@ const RegisterForm = () => {
       const responseData = await response.json();
 
       if (responseData.status === false) {
-        Toast.show(responseData.Message, Toast.LONG);
+        alert(responseData.Message);
 
         setIsAuthenticated(false);
       } else {
@@ -95,7 +94,7 @@ const RegisterForm = () => {
 
       return responseData;
     } catch (error) {
-      Toast.show(error.Message, Toast.LONG);
+      alert(error.Message);
     } finally {
       setLoading(false);
     }

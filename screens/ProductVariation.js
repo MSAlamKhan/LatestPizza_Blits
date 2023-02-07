@@ -16,7 +16,6 @@ import {
   import CommonButton from '../components/CommonButton';
   import { APIURL } from '../constants/Url';
   import { AuthContext } from '../context/Auth';
-  import Toast from 'react-native-simple-toast';
   import { useFocusEffect } from '@react-navigation/native';
   import Ionicons from 'react-native-vector-icons/Ionicons';
   import Entypo from 'react-native-vector-icons/Entypo';
@@ -132,12 +131,12 @@ import {
           `wishList${userDetails.user_id}`,
           JSON.stringify(updatedItems),
         );
-        Toast.show(`${productData.name} added to wishlist`, Toast.SHORT);
+        alert(`${productData.name} added to wishlist`);
         await setWishlist(updatedItems);
       } else {
         const filterWishlistArray = wishlist.filter(
           item => item !== productData.id,
-          Toast.show(`${productData.name} removed from wishlist`, Toast.SHORT),
+          alert(`${productData.name} removed from wishlist`),
         );
         await setWishlist(filterWishlistArray);
         AsyncStorage.setItem(
@@ -160,13 +159,12 @@ import {
         totalAddonPrice: selectedItem.addonstotalAmount,
       }));
       if (Quantity == productData.qty) {
-        Toast.show(
-          `Quantity available is ${productData.qty} cannot add more`,
-          Toast.LONG,
+        alert(
+          `Quantity available is ${productData.qty} cannot add more`
         );
       } else {
         if (Quantity < productData.qty);
-        Toast.show(` ${productItem[0].name} added to Cart`, Toast.SHORT);
+        alert(` ${productItem[0].name} added to Cart`);
         // console.log('selected type', selectedType);
         // console.log('productItem', productItem[0]);
         // console.log(cart);
@@ -189,13 +187,7 @@ import {
       // );
   
       // if (productData.quantity == productData.qty) {
-      //   Toast.show(
-      //     `Quantity available is ${productData.qty} cannot add more`,
-      //     Toast.LONG,
-      //   );
-      // } else {
-      //   if (productData.quantity < productData.qty);
-      //   Toast.show(` ${productItem[0].name} added to Cart`, Toast.LONG);
+     
       //   AddCart(productItem[0]);
       // }
     };
@@ -683,7 +675,7 @@ import {
             onPress={() => {
               isSignin
                 ? addToWishList()
-                : Toast.show(`Login to add Short List`, Toast.SHORT);
+                : alert(`Login to add Short List`);
             }}
           />
   

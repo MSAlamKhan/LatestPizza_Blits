@@ -15,7 +15,6 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { AuthContext } from '../context/Auth';
 import LottieView from 'lottie-react-native';
-import Toast from 'react-native-simple-toast';
 
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 
@@ -47,7 +46,7 @@ const ProductContainer = props => {
     const product = productData.items[index];
 
     product.quantity == product.qty &&
-      Toast.show(`Quantity available is ${product.qty}`, Toast.LONG);
+    alert(`Quantity available is ${product.qty}`);
     if (product.quantity < product.qty) {
       AddCart(product);
 
